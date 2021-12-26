@@ -16,6 +16,9 @@ struct WeatherModel {
     let pressure: Int
     let humidity: Int
     
+    let condition: String
+    let description: String
+    
     var temperatureString: String {
         return String(format: "%.1f", temperature)
         }

@@ -10,6 +10,8 @@ import UIKit
 class WeatherViewController: UIViewController {
     @IBOutlet weak var cityNameTextField: UITextField!
     @IBOutlet weak var weatherConditionImageView: UIImageView!
+    @IBOutlet weak var conditionLabel: UILabel!
+    @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var tempLabel: UILabel!
     @IBOutlet weak var cityNameLabel: UILabel!
     @IBOutlet weak var tempMinLabel: UILabel!
@@ -57,10 +59,12 @@ class WeatherViewController: UIViewController {
         self.weatherConditionImageView.image = UIImage(systemName: weather.conditionName)
         self.tempLabel.text = "🌡 \(weather.temperatureString)°C"
         self.cityNameLabel.text = "🌆 \(weather.cityName)"
+        self.conditionLabel.text = "🌞 \(weather.condition)"
+        self.descriptionLabel.text = "ℹ️ \(weather.description)"
         self.tempMinLabel.text = "⬇ \(weather.tempMin)°C"
         self.tempMaxLabel.text = "⬆ \(weather.tempMax)°C"
-        self.pressureLabel.text = "💪 \(weather.pressure)hPa"
-        self.humidityLabel.text = "💧 \(weather.humidity)%"
+        self.pressureLabel.text = "🔄 \(weather.pressure) hPa"
+        self.humidityLabel.text = "💧 \(weather.humidity) %"
     }
     
     private func presentErrorMessage(with error: String) {
