@@ -38,7 +38,7 @@
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Search" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="at9-uD-X4R">
                                         <rect key="frame" x="0.0" y="0.0" width="338.5" height="45.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="search"/>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e07-tH-lmW">
                                         <rect key="frame" x="348.5" y="0.0" width="45.5" height="45.5"/>
@@ -47,21 +47,24 @@
                                         </constraints>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" image="magnifyingglass" catalog="system"/>
+                                        <connections>
+                                            <action selector="searchPressed:" destination="V9b-DQ-lNn" eventType="touchUpInside" id="QJl-Tn-QaP"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="8bs-hq-tTq">
                                 <rect key="frame" x="10" y="159.5" width="394" height="212"/>
                                 <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sun.max" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="Gg8-lq-M6Q">
-                                        <rect key="frame" x="137" y="-0.5" width="120" height="120.5"/>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="questionmark.circle" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="Gg8-lq-M6Q">
+                                        <rect key="frame" x="137" y="0.5" width="120" height="119"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="Gg8-lq-M6Q" secondAttribute="height" id="E2a-El-0fv"/>
                                             <constraint firstAttribute="height" constant="120" id="aLa-pG-IeX"/>
                                         </constraints>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="XX°C" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="npN-JQ-8Xt">
-                                        <rect key="frame" x="152.5" y="130" width="89.5" height="43"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--°C" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="npN-JQ-8Xt">
+                                        <rect key="frame" x="160.5" y="130" width="73.5" height="43"/>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="36"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -77,15 +80,15 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="b06-l6-WBt">
                                 <rect key="frame" x="309.5" y="650.5" width="74.5" height="112.5"/>
                                 <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cloud.sun" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="DKZ-bP-2rV">
-                                        <rect key="frame" x="7.5" y="-0.5" width="61" height="59"/>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="questionmark.circle" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="DKZ-bP-2rV">
+                                        <rect key="frame" x="7.5" y="0.5" width="60" height="59"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="DKZ-bP-2rV" secondAttribute="height" id="nHM-T6-vbq"/>
                                             <constraint firstAttribute="height" constant="60" id="wLq-1p-Zz4"/>
                                         </constraints>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="XX°C" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Owi-AB-YSG">
-                                        <rect key="frame" x="12.5" y="64" width="50" height="24"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--°C" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Owi-AB-YSG">
+                                        <rect key="frame" x="17" y="64" width="41" height="24"/>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -113,6 +116,14 @@
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Weather" image="sun.max.circle" catalog="system" selectedImage="sun.max.circle" id="MHQ-Hh-ftx"/>
+                    <connections>
+                        <outlet property="NYTempLabel" destination="Owi-AB-YSG" id="QWz-wb-HaR"/>
+                        <outlet property="NYWeatherContitionImageView" destination="DKZ-bP-2rV" id="g3i-rb-eyl"/>
+                        <outlet property="cityNameLabel" destination="zdY-Xr-qcS" id="qyt-Vr-Q4I"/>
+                        <outlet property="cityNameTextField" destination="at9-uD-X4R" id="M2M-nu-e63"/>
+                        <outlet property="tempLabel" destination="npN-JQ-8Xt" id="yB5-OJ-jrk"/>
+                        <outlet property="weatherConditionImageView" destination="Gg8-lq-M6Q" id="A42-NE-TV8"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="58C-xU-BHp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -219,10 +230,9 @@
     </scenes>
     <resources>
         <image name="character.bubble" catalog="system" width="128" height="110"/>
-        <image name="cloud.sun" catalog="system" width="128" height="95"/>
         <image name="dollarsign.circle" catalog="system" width="128" height="121"/>
         <image name="magnifyingglass" catalog="system" width="128" height="115"/>
-        <image name="sun.max" catalog="system" width="128" height="124"/>
+        <image name="questionmark.circle" catalog="system" width="128" height="121"/>
         <image name="sun.max.circle" catalog="system" width="128" height="121"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

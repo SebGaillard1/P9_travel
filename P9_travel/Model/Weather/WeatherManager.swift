@@ -17,14 +17,14 @@ class WeatherManager {
     
     private var weatherTask = URLSession(configuration: .default)
     
-    static var cityName: String?
+    //var cityName: String?
     
-    func getWeather(callBack: @escaping (Bool, WeatherModel?) -> Void) {
-        let request = createWeatherRequest()
+    func getWeather(cityName: String?, callBack: @escaping (Bool, WeatherModel?) -> Void) {
+        let request = URLRequest(url: URL(string: "\(openWeatherApiURL)&q=\(cityName!)")!)
         
         task?.cancel()
         
-        weatherTask.dataTask(with: request) { data, response, error in
+        task = weatherTask.dataTask(with: request) { data, response, error in
             DispatchQueue.main.async {
                 guard let data = data, error == nil else {
                     callBack(false, nil)
@@ -51,9 +51,5 @@ class WeatherManager {
         }
         
         task?.resume()
-    }
-    
-    private func createWeatherRequest() -> URLRequest {
-        return URLRequest(url: URL(string: "\(openWeatherApiURL)&q=\(WeatherManager.cityName ?? "New York")")!)
     }
 }
