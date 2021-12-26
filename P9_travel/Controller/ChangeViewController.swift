@@ -14,6 +14,8 @@ class ChangeViewController: UIViewController {
     @IBOutlet weak var convertButton: UIButton!
     @IBOutlet weak var currencyPickerView: UIPickerView!
     
+    var rates: Rates?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -32,18 +34,18 @@ class ChangeViewController: UIViewController {
     
     private func refreshRates() {
         ChangeService.shared.getRates { success, changeRates in
-            if success {
-                let ac = UIAlertController(title: "Success", message: "Success", preferredStyle: .alert)
-                ac.addAction(UIAlertAction(title: "OK", style: .default))
-                //self.present(ac, animated: true)
-            } else {
-                let ac = UIAlertController(title: "Error", message: "Error", preferredStyle: .alert)
+            if !success {
+                let ac = UIAlertController(title: "Error", message: "Failed to fetch rates", preferredStyle: .alert)
                 ac.addAction(UIAlertAction(title: "OK", style: .default))
                 self.present(ac, animated: true)
+            } else {
+                self.rates = changeRates
             }
         }
     }
 }
+
+
 
 extension ChangeViewController: UIPickerViewDataSource, UIPickerViewDelegate {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -56,6 +58,10 @@ extension ChangeViewController: UIPickerViewDataSource, UIPickerViewDelegate {
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         return Currencies.currenciesArray[row]
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        print("\(row) selected")
     }
 }
 

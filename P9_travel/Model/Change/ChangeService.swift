@@ -18,9 +18,11 @@ class ChangeService {
     
     private var rateSession = URLSession(configuration: .default)
     
-    //private var lastFetchingRatesDate: Date?
+    private var lastFetchingRatesDate: Date?
     
     func getRates(callBack: @escaping (Bool, Rates?) -> Void) {
+        if lastFetchingRatesDate == nil || lastFetchingRatesDate != Date() {
+            
         let request = ChangeService.createRatesRequest()
         
         task?.cancel()
@@ -37,7 +39,17 @@ class ChangeService {
                 }
                 
                 guard let responseJSON = try? JSONDecoder().decode(RateData.self, from: data)
-                else { return }
+                else {
+                    callBack(false, nil)
+                    return
+                }
+                
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "yyyy-MM-dd"
+                self.lastFetchingRatesDate = dateFormatter.date(from: responseJSON.date)
+//                print(responseJSON.date)
+//                print(self.lastFetchingRatesDate)
+//                print(Date())
                 
                 let rates = responseJSON.rates
                 callBack(true, rates)
@@ -45,6 +57,7 @@ class ChangeService {
         }
         
         task?.resume()
+        }
     }
     
     private static func createRatesRequest() -> URLRequest {

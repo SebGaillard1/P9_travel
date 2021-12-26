@@ -8,6 +8,7 @@
 import Foundation
 
 struct RateData: Codable {
+    let date: String
     let base: String
     let rates: Rates
 }
