@@ -41,8 +41,12 @@ class WeatherManager {
                 let id = responseJSON.weather[0].id
                 let temp = responseJSON.main.temp
                 let city = responseJSON.name
+                let tempMax = responseJSON.main.temp_max
+                let tempMin = responseJSON.main.temp_min
+                let pressure = responseJSON.main.pressure
+                let humidity = responseJSON.main.humidity
                 
-                let weather = WeatherModel(conditionID: id, cityName: city, temperature: temp)
+                let weather = WeatherModel(conditionID: id, cityName: city, temperature: temp, tempMin: tempMin, tempMax: tempMax, pressure: pressure, humidity: humidity)
                 
                 callBack(true, weather)
             }
