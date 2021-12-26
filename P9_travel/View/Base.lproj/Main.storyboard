@@ -18,7 +18,7 @@
                         <viewLayoutGuide key="safeArea" id="4LI-Vl-RQb"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Traduction" image="character.bubble" catalog="system" selectedImage="character.bubble" id="4gg-ML-wlI"/>
+                    <tabBarItem key="tabBarItem" title="Traduction" image="character.bubble" catalog="system" selectedImage="character.bubble.fill" id="4gg-ML-wlI"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EZL-Jd-2kC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -151,7 +151,7 @@
                             <constraint firstItem="Aea-d7-qgV" firstAttribute="leading" secondItem="bu7-to-7iR" secondAttribute="leading" constant="10" id="uTi-8j-cao"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Weather" image="sun.max.circle" catalog="system" selectedImage="sun.max.circle" id="MHQ-Hh-ftx"/>
+                    <tabBarItem key="tabBarItem" title="Weather" image="sun.max.circle" catalog="system" selectedImage="sun.max.circle.fill" id="MHQ-Hh-ftx"/>
                     <connections>
                         <outlet property="NYTempLabel" destination="Owi-AB-YSG" id="QWz-wb-HaR"/>
                         <outlet property="NYWeatherContitionImageView" destination="DKZ-bP-2rV" id="g3i-rb-eyl"/>
@@ -191,7 +191,7 @@
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5vI-nT-3XV">
                                         <rect key="frame" x="0.0" y="0.0" width="276" height="60"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="decimalPad" returnKeyType="continue"/>
                                     </textField>
                                     <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0T1-sA-6cn">
                                         <rect key="frame" x="276" y="0.0" width="118" height="60"/>
@@ -237,7 +237,7 @@
                             <constraint firstItem="UjK-S6-wcT" firstAttribute="leading" secondItem="F1J-Vy-mGm" secondAttribute="leading" constant="10" id="zi4-pg-KYL"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Change" image="dollarsign.circle" catalog="system" selectedImage="dollarsign.circle" id="1bH-R2-WCc"/>
+                    <tabBarItem key="tabBarItem" title="Change" image="dollarsign.circle" catalog="system" selectedImage="dollarsign.circle.fill" id="1bH-R2-WCc"/>
                     <connections>
                         <outlet property="amountTextField" destination="5vI-nT-3XV" id="cmo-BH-30s"/>
                         <outlet property="convertButton" destination="z3z-uN-qEF" id="uto-ol-vHc"/>
@@ -258,6 +258,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="selectedImageTintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
                         <segue destination="lTj-dm-Am3" kind="relationship" relationship="viewControllers" id="EeR-iM-9vZ"/>
@@ -272,10 +273,13 @@
     </scenes>
     <resources>
         <image name="character.bubble" catalog="system" width="128" height="110"/>
+        <image name="character.bubble.fill" catalog="system" width="128" height="110"/>
         <image name="dollarsign.circle" catalog="system" width="128" height="121"/>
+        <image name="dollarsign.circle.fill" catalog="system" width="128" height="121"/>
         <image name="magnifyingglass" catalog="system" width="128" height="115"/>
         <image name="questionmark.circle" catalog="system" width="128" height="121"/>
         <image name="sun.max.circle" catalog="system" width="128" height="121"/>
+        <image name="sun.max.circle.fill" catalog="system" width="128" height="121"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
