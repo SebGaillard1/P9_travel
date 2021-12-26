@@ -16,11 +16,9 @@ class WeatherManager {
     private var task: URLSessionDataTask?
     
     private var weatherTask = URLSession(configuration: .default)
-    
-    //var cityName: String?
-    
+        
     func getWeather(cityName: String?, callBack: @escaping (Bool, WeatherModel?) -> Void) {
-        let request = URLRequest(url: URL(string: "\(openWeatherApiURL)&q=\(cityName!)")!)
+        let request = URLRequest(url: URL(string: "\(openWeatherApiURL)&q=\(cityName!)") ?? URL(string: "\(openWeatherApiURL)&q=\("Paris")")!)
         
         task?.cancel()
         
