@@ -49,6 +49,9 @@
                                 <buttonConfiguration key="configuration" style="filled" title="Trad">
                                     <color key="baseBackgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </buttonConfiguration>
+                                <connections>
+                                    <action selector="tradButtonPressed:" destination="uTt-fh-Z7b" eventType="touchUpInside" id="mUA-eg-cng"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="4LI-Vl-RQb"/>
@@ -70,6 +73,11 @@
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Traduction" image="character.bubble" catalog="system" selectedImage="character.bubble.fill" id="4gg-ML-wlI"/>
+                    <connections>
+                        <outlet property="outputTextView" destination="Tzy-41-KnW" id="gpf-fW-wj5"/>
+                        <outlet property="tradButton" destination="biK-1C-CdZ" id="CNu-1Z-Vdh"/>
+                        <outlet property="userInputTextView" destination="3xL-lf-SEX" id="DzY-FC-yYe"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EZL-Jd-2kC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
