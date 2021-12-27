@@ -8,10 +8,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Traduction-->
+        <!--Translation-->
         <scene sceneID="Kdo-Mn-f32">
             <objects>
-                <viewController id="uTt-fh-Z7b" customClass="TraductionViewController" customModule="P9_travel" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="uTt-fh-Z7b" customClass="TranslationViewController" customModule="P9_travel" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5wY-xT-oRv">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -72,7 +72,7 @@
                             <constraint firstItem="3xL-lf-SEX" firstAttribute="leading" secondItem="4LI-Vl-RQb" secondAttribute="leading" constant="20" id="vDw-BQ-Pa6"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Traduction" image="character.bubble" catalog="system" selectedImage="character.bubble.fill" id="4gg-ML-wlI"/>
+                    <tabBarItem key="tabBarItem" title="Translation" image="character.bubble" catalog="system" selectedImage="character.bubble.fill" id="4gg-ML-wlI"/>
                     <connections>
                         <outlet property="outputTextView" destination="Tzy-41-KnW" id="gpf-fW-wj5"/>
                         <outlet property="tradButton" destination="biK-1C-CdZ" id="CNu-1Z-Vdh"/>

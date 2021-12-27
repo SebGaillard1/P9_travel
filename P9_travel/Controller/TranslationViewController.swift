@@ -7,7 +7,7 @@
 
 import UIKit
 
-class TraductionViewController: UIViewController {
+class TranslationViewController: UIViewController {
     @IBOutlet weak var userInputTextView: UITextView!
     @IBOutlet weak var outputTextView: UITextView!
     @IBOutlet weak var tradButton: UIButton!
