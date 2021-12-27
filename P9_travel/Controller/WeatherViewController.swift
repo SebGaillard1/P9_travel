@@ -33,8 +33,17 @@ class WeatherViewController: UIViewController {
         getWeather()
     }
     
+    private func formatCityName() -> String {
+        guard let string = cityNameTextField.text else { return "" }
+        let arrayOfString = string.condenseWhitespace().components(separatedBy: " ")
+        var backToString = arrayOfString.joined(separator: "+")
+        backToString = backToString.trimmingCharacters(in: .whitespacesAndNewlines)
+        
+        return backToString
+    }
+    
     private func getWeather() {
-        WeatherManager.shared.getWeather(cityName: cityNameTextField.text) { success, weather in
+        WeatherManager.shared.getWeather(cityName: formatCityName()) { success, weather in
             if success {
                 // On affiche les données météo
                 self.updateWeatherViews(with: weather!)
