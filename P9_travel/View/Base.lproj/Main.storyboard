@@ -16,18 +16,16 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="3xL-lf-SEX">
-                                <rect key="frame" x="20" y="54" width="374" height="354"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Bonjour" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="3xL-lf-SEX">
+                                <rect key="frame" x="20" y="85" width="374" height="327.5"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                 <color key="textColor" systemColor="labelColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Tzy-41-KnW">
-                                <rect key="frame" x="20" y="488" width="374" height="251"/>
+                                <rect key="frame" x="20" y="483.5" width="374" height="255.5"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                 <color key="textColor" systemColor="labelColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -46,27 +44,36 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F3d-EA-Jx7">
-                                <rect key="frame" x="139" y="428" width="136.5" height="40"/>
+                                <rect key="frame" x="101" y="432.5" width="212" height="31"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="JKz-dt-v2T"/>
+                                    <constraint firstAttribute="height" constant="31" id="JKz-dt-v2T"/>
                                 </constraints>
-                                <color key="tintColor" systemColor="labelColor"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Choose language"/>
+                                <buttonConfiguration key="configuration" style="gray" title="Choose destination language"/>
                                 <connections>
                                     <segue destination="bNp-Rb-hbg" kind="presentation" identifier="segueToLanguages" id="iOr-ZS-P6j"/>
                                 </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UNf-3e-pJz">
+                                <rect key="frame" x="115" y="49" width="184" height="31"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="31" id="eaN-sa-lES"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="gray" title="Choose source language"/>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="4LI-Vl-RQb"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="3xL-lf-SEX" firstAttribute="top" secondItem="4LI-Vl-RQb" secondAttribute="top" constant="10" id="AIh-jJ-ce5"/>
                             <constraint firstItem="Tzy-41-KnW" firstAttribute="leading" secondItem="4LI-Vl-RQb" secondAttribute="leading" constant="20" id="Het-X8-8es"/>
                             <constraint firstItem="biK-1C-CdZ" firstAttribute="top" secondItem="Tzy-41-KnW" secondAttribute="bottom" constant="10" id="Qym-wQ-axf"/>
+                            <constraint firstItem="UNf-3e-pJz" firstAttribute="top" secondItem="4LI-Vl-RQb" secondAttribute="top" constant="5" id="RV5-8f-TYK"/>
                             <constraint firstItem="biK-1C-CdZ" firstAttribute="leading" secondItem="4LI-Vl-RQb" secondAttribute="leading" constant="20" id="TQi-Rt-9A4"/>
                             <constraint firstItem="F3d-EA-Jx7" firstAttribute="centerX" secondItem="5wY-xT-oRv" secondAttribute="centerX" id="U6i-tn-g19"/>
+                            <constraint firstItem="UNf-3e-pJz" firstAttribute="centerX" secondItem="5wY-xT-oRv" secondAttribute="centerX" id="V07-EO-o2H"/>
                             <constraint firstItem="Tzy-41-KnW" firstAttribute="top" secondItem="F3d-EA-Jx7" secondAttribute="bottom" constant="20" id="bcb-Ue-FrW"/>
+                            <constraint firstItem="3xL-lf-SEX" firstAttribute="top" secondItem="UNf-3e-pJz" secondAttribute="bottom" constant="5" id="bmW-Kf-CPG"/>
                             <constraint firstItem="4LI-Vl-RQb" firstAttribute="trailing" secondItem="Tzy-41-KnW" secondAttribute="trailing" constant="20" id="etL-nP-pOX"/>
                             <constraint firstItem="4LI-Vl-RQb" firstAttribute="trailing" secondItem="biK-1C-CdZ" secondAttribute="trailing" constant="20" id="gde-QT-v1d"/>
                             <constraint firstItem="F3d-EA-Jx7" firstAttribute="centerY" secondItem="5wY-xT-oRv" secondAttribute="centerY" id="i8z-E6-g5d"/>
@@ -78,7 +85,9 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Translation" image="character.bubble" catalog="system" selectedImage="character.bubble.fill" id="4gg-ML-wlI"/>
                     <connections>
+                        <outlet property="destinationLanguageButton" destination="F3d-EA-Jx7" id="KDR-Mx-fEB"/>
                         <outlet property="outputTextView" destination="Tzy-41-KnW" id="gpf-fW-wj5"/>
+                        <outlet property="sourceLanguageButton" destination="UNf-3e-pJz" id="w1l-MB-WRr"/>
                         <outlet property="tradButton" destination="biK-1C-CdZ" id="CNu-1Z-Vdh"/>
                         <outlet property="userInputTextView" destination="3xL-lf-SEX" id="DzY-FC-yYe"/>
                     </connections>

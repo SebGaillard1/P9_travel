@@ -38,26 +38,15 @@ enum TranslationAPI {
 
 class TranslationManager {
     static let shared = TranslationManager()
-    
-    private static let urlTranslate = URL(string: "https://translation.googleapis.com/language/translate/v2")!
-    
-    private let apiKey = "AIzaSyCqKWJpn9tjEuHV0mrx31nl25XUzlIugpg"
-    
     private init() {}
     
+    private let apiKey = "AIzaSyCqKWJpn9tjEuHV0mrx31nl25XUzlIugpg"
+
     var supportedLanguages = [TranslationLanguage]()
+    var textToTranslate: String?
+    var targetLanguageCode: String?
     
     private func makeRequest(usingTranslationAPI api: TranslationAPI, urlParams: [String: String], callBack: @escaping (Bool, [String: Any]?) -> Void) {
-        //        if var components = URLComponents(string: api.getURL()) {
-        //            components.queryItems = [URLQueryItem]()
-        //
-        //            for (key, value) in urlParams {
-        //                components.queryItems?.append(URLQueryItem(name: key, value: value))
-        //            }
-        //        } else {
-        //            callback(false, nil)
-        //        }
-        
         // We have to add the URL parameters to our dictionnary. We use URLComponents for that
         guard var components = URLComponents(string: api.getURL()) else {
             callBack(false, nil)
@@ -71,10 +60,7 @@ class TranslationManager {
         }
         
         // Now we have to create a URLRequest using the URL built from the components object and the appropriate HTTP method
-        guard let url = components.url else {
-            callBack(false, nil)
-            return
-        }
+        guard let url = components.url else { callBack(false, nil); return }
         
         var request = URLRequest(url: url)
         request.httpMethod = api.getHTTPMethod()
@@ -92,7 +78,6 @@ class TranslationManager {
                 guard let resultDict = try? JSONSerialization.jsonObject(with: data, options: .mutableLeaves) as? [String: Any] else { callBack(false, nil); return }
                 
                 callBack(true, resultDict)
-                
             }
         }
         
@@ -128,6 +113,44 @@ class TranslationManager {
             supportedLanguages.append(TranslationLanguage(code: languageCode, name: languageName))
         }
         return true
+    }
+    
+    func translate(callBack: @escaping (String?) -> Void) {
+        guard let textToTranslate = textToTranslate, let targetLanguage = targetLanguageCode else { callBack(nil); return }
+        
+        var urlParam = [String: String]()
+        urlParam["key"] = apiKey
+        urlParam["q"] = textToTranslate
+        urlParam["target"] = targetLanguage
+        urlParam["format"] = "text"
+      
+        // A utiliser lors de l'implementation de la détection du langage source
+//        if let sourceLanguage = sourceLanguageCode {
+//            urlParam["source"] = sourceLanguage
+//        }
+        
+        makeRequest(usingTranslationAPI: .translate, urlParams: urlParam) { success, data in
+            guard let data = data else { callBack(nil); return }
+            callBack(self.parseJSONTranslate(with: data))
+        }
+    }
+    
+    private func parseJSONTranslate(with data: [String: Any]) -> String? {
+        guard let data = data["data"] as? [String: Any], let translations = data["translations"] as? [[String: Any]] else { return nil }
+        var allTranslations = [String]()
+        
+        for translation in translations {
+            if let translatedText = translation["translatedText"] as? String {
+                allTranslations.append(translatedText)
+            }
+        }
+        
+        // We expect only 1 translation
+        if allTranslations.count > 0 {
+            return allTranslations[0]
+        } else {
+            return nil
+        }
     }
     
 }

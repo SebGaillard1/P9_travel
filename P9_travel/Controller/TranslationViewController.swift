@@ -11,6 +11,8 @@ class TranslationViewController: UIViewController {
     @IBOutlet weak var userInputTextView: UITextView!
     @IBOutlet weak var outputTextView: UITextView!
     @IBOutlet weak var tradButton: UIButton!
+    @IBOutlet weak var sourceLanguageButton: UIButton!
+    @IBOutlet weak var destinationLanguageButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,6 +21,22 @@ class TranslationViewController: UIViewController {
     }
     
     @IBAction func tradButtonPressed(_ sender: Any) {
+        TranslationManager.shared.textToTranslate = userInputTextView.text
+        startTranslation()
+    }
+    
+    private func startTranslation() {
+        TranslationManager.shared.translate { translation in
+            if translation != nil {
+                // Success, we show the translation
+                DispatchQueue.main.async {
+                    self.outputTextView.text = translation
+                }
+            } else {
+                // Failed, something went wrong
+                print("wroooooong")
+            }
+        }
     }
     
 
