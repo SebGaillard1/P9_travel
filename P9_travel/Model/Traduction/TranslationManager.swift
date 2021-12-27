@@ -45,6 +45,8 @@ class TranslationManager {
     
     private init() {}
     
+    var supportedLanguages = [TranslationLanguage]()
+    
     private func makeRequest(usingTranslationAPI api: TranslationAPI, urlParams: [String: String], callBack: @escaping (Bool, [String: Any]?) -> Void) {
         //        if var components = URLComponents(string: api.getURL()) {
         //            components.queryItems = [URLQueryItem]()
@@ -83,20 +85,11 @@ class TranslationManager {
         let task = session.dataTask(with: request) { data, response, error in
             // TO DO
             DispatchQueue.main.async {
-                guard let data = data, error == nil else {
-                    callBack(false, nil)
-                    return
-                }
+                guard let data = data, error == nil else { callBack(false, nil); return }
                 
-                guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
-                    callBack(false, nil)
-                    return
-                }
+                guard let response = response as? HTTPURLResponse, response.statusCode == 200 else { callBack(false, nil); return }
                 
-                guard let resultDict = try? JSONSerialization.jsonObject(with: data, options: .mutableLeaves) as? [String: Any] else {
-                    callBack(false, nil)
-                    return
-                }
+                guard let resultDict = try? JSONSerialization.jsonObject(with: data, options: .mutableLeaves) as? [String: Any] else { callBack(false, nil); return }
                 
                 callBack(true, resultDict)
                 
@@ -105,7 +98,43 @@ class TranslationManager {
         
         task.resume()
     }
+    
+    func fetchSupportedLanguages(callBack: @escaping (Bool) -> Void) {
+        var urlParams = [String: String]()
+        urlParams["key"] = apiKey
+        urlParams["target"] = Locale.current.languageCode ?? "en"
+        
+        makeRequest(usingTranslationAPI: .supportedLanguages, urlParams: urlParams) { success, data in
+            guard let data = data else { callBack(false); return }
+            let parseSuccess = self.parseJSONForSupportedLanguages(with: data)
+            callBack(parseSuccess)
+        }
+    }
+    
+    private func parseJSONForSupportedLanguages(with data: [String: Any]) -> Bool {
+        guard let data = data["data"] as? [String: Any], let languages = data["languages"] as? [[String:Any]] else { return false }
+        
+        for lang in languages {
+            var languageCode: String?
+            var languageName: String?
+            
+            if let code = lang["language"] as? String {
+                languageCode = code
+            }
+            if let name = lang["name"] as? String {
+                languageName = name
+            }
+            
+            supportedLanguages.append(TranslationLanguage(code: languageCode, name: languageName))
+        }
+        return true
+    }
+    
 }
 
+struct TranslationLanguage {
+    var code: String?
+    var name: String?
+}
 
 
