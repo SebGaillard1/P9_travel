@@ -13,6 +13,7 @@
 		576CC1B5276516A5000DD587 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 576CC1B4276516A5000DD587 /* Assets.xcassets */; };
 		576CC1B8276516A5000DD587 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 576CC1B6276516A5000DD587 /* LaunchScreen.storyboard */; };
 		576CC1C3276516A5000DD587 /* P9_travelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 576CC1C2276516A5000DD587 /* P9_travelTests.swift */; };
+		57CA9EB2277A7AD600EBE3BB /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57CA9EB1277A7AD600EBE3BB /* Extensions.swift */; };
 		57CE11392778A53100431236 /* ChangeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57CE11382778A53100431236 /* ChangeViewController.swift */; };
 		57CE113B2778A54900431236 /* TranslationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57CE113A2778A54900431236 /* TranslationViewController.swift */; };
 		57CE113D2778A55300431236 /* WeatherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57CE113C2778A55300431236 /* WeatherViewController.swift */; };
@@ -46,6 +47,7 @@
 		576CC1B9276516A5000DD587 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		576CC1BE276516A5000DD587 /* P9_travelTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = P9_travelTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		576CC1C2276516A5000DD587 /* P9_travelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = P9_travelTests.swift; sourceTree = "<group>"; };
+		57CA9EB1277A7AD600EBE3BB /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		57CE11382778A53100431236 /* ChangeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeViewController.swift; sourceTree = "<group>"; };
 		57CE113A2778A54900431236 /* TranslationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslationViewController.swift; sourceTree = "<group>"; };
 		57CE113C2778A55300431236 /* WeatherViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherViewController.swift; sourceTree = "<group>"; };
@@ -100,6 +102,7 @@
 			children = (
 				576CC1AB276516A4000DD587 /* AppDelegate.swift */,
 				576CC1AD276516A4000DD587 /* SceneDelegate.swift */,
+				57CA9EB1277A7AD600EBE3BB /* Extensions.swift */,
 				576CC1B9276516A5000DD587 /* Info.plist */,
 				57CE11372778A22F00431236 /* Model */,
 				57CE11362778A22500431236 /* Controller */,
@@ -285,6 +288,7 @@
 				57CE116F2778FC6D00431236 /* Weather.swift in Sources */,
 				57CE11392778A53100431236 /* ChangeViewController.swift in Sources */,
 				576CC1AE276516A4000DD587 /* SceneDelegate.swift in Sources */,
+				57CA9EB2277A7AD600EBE3BB /* Extensions.swift in Sources */,
 				57CE116D2778F87600431236 /* WeatherManager.swift in Sources */,
 				57CE113F2778A74900431236 /* ChangeService.swift in Sources */,
 				57CE11762779F05300431236 /* LanguagesViewController.swift in Sources */,

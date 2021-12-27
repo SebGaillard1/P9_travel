@@ -81,11 +81,3 @@ extension ChangeViewController: UITextFieldDelegate {
     }
 }
 
-extension String {
-    var onlyNumbers: String {
-        let charset = CharacterSet.punctuationCharacters.union(CharacterSet.decimalDigits).inverted
-
-        return components(separatedBy: charset).joined()
-    }
-}
-
