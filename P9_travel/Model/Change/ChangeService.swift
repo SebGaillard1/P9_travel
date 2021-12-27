@@ -11,7 +11,7 @@ class ChangeService {
     static var shared = ChangeService()
     private init() {}
     
-    private static let apiKey = "a7841991a6a36d9a87dbcef10bb31e27"
+    private static let apiKey = "1d085c2a08943cb28106d51cefcfee5e"
     private static let url = "http://data.fixer.io/api/latest"
     
     private var task: URLSessionDataTask?
@@ -36,8 +36,8 @@ class ChangeService {
     }
     
     func getRates(callBack: @escaping (Bool, [String: Any]?) -> Void) {
-        if lastFetchingRatesDate == nil || lastFetchingRatesDate != Date() {
-            
+        if alreadyFetchRatesToday() { callBack(true, currenciesWithRates); return } // Si on a déja les données, on renvoies les données locales
+        
         let request = ChangeService.createRatesRequest()
         
         task?.cancel()
@@ -53,18 +53,22 @@ class ChangeService {
                 
                 self.currenciesWithRates = rates
                 
-                let dateFormatter = DateFormatter()
-                dateFormatter.dateFormat = "yyyy-MM-dd"
-                //self.lastFetchingRatesDate = dateFormatter.date(from: responseJSON.date)
-//                print(responseJSON.date)
-//                print(self.lastFetchingRatesDate)
-//                print(Date())
+                self.lastFetchingRatesDate = Date()
                 
                 callBack(true, rates)
             }
         }
         
         task?.resume()
+    }
+    
+    private func alreadyFetchRatesToday() -> Bool {
+        guard let date = lastFetchingRatesDate else { return false }
+        
+        if Calendar.current.isDateInToday(date) {
+            return true
+        } else {
+            return false
         }
     }
     
@@ -73,14 +77,18 @@ class ChangeService {
     }
     
     func convert(amount: String?, to currency: String?) -> String {
-        guard let stringAmount = amount else { return "0" }
-        guard let amount = Double(stringAmount) else { return "0" }
+        guard let amountString = amount else { return "0" }
+        guard let amountDouble = Double(amountString) else { return "0" }
         
         guard let currency = currency else { return "0" }
         guard let rate = currenciesWithRates[currency] as? Double else { return "0" }
         
-        let result = amount * rate
+        let eurToUserCurrency = amountDouble * (1/rate)
         
-        return String(format: "%.2f", result)
+        guard let USDRateAsDouble = currenciesWithRates["USD"] as? Double else { return "0" }
+        
+        let finalResult = eurToUserCurrency * USDRateAsDouble
+        
+        return String(format: "%.2f", finalResult)
     }
 }

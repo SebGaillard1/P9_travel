@@ -48,7 +48,7 @@ class ChangeViewController: UIViewController {
     }
     
     private func updateResultTextField() {
-        resultLabel.text = "\(ChangeService.shared.convert(amount: amountTextField.text, to: ChangeService.shared.currencies[currentRow])) \(ChangeService.shared.currencies[currentRow])"
+        resultLabel.text = "\(ChangeService.shared.convert(amount: amountTextField.text, to: ChangeService.shared.currencies[currentRow])) USD"
 
     }
     
