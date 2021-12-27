@@ -45,7 +45,7 @@ class TranslationManager {
     
     private init() {}
     
-    private func makeRequest(usingTranslationAPI api: TranslationAPI, urlParams: [String: String], callback: @escaping (Bool, [String: Any]?) -> Void) {
+    private func makeRequest(usingTranslationAPI api: TranslationAPI, urlParams: [String: String], callBack: @escaping (Bool, [String: Any]?) -> Void) {
         //        if var components = URLComponents(string: api.getURL()) {
         //            components.queryItems = [URLQueryItem]()
         //
@@ -58,7 +58,7 @@ class TranslationManager {
         
         // We have to add the URL parameters to our dictionnary. We use URLComponents for that
         guard var components = URLComponents(string: api.getURL()) else {
-            callback(false, nil)
+            callBack(false, nil)
             return
         }
         
@@ -70,7 +70,7 @@ class TranslationManager {
         
         // Now we have to create a URLRequest using the URL built from the components object and the appropriate HTTP method
         guard let url = components.url else {
-            callback(false, nil)
+            callBack(false, nil)
             return
         }
         
@@ -82,10 +82,30 @@ class TranslationManager {
         let session = URLSession(configuration: .default)
         let task = session.dataTask(with: request) { data, response, error in
             // TO DO
+            DispatchQueue.main.async {
+                guard let data = data, error == nil else {
+                    callBack(false, nil)
+                    return
+                }
+                
+                guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
+                    callBack(false, nil)
+                    return
+                }
+                
+                guard let resultDict = try? JSONSerialization.jsonObject(with: data, options: .mutableLeaves) as? [String: Any] else {
+                    callBack(false, nil)
+                    return
+                }
+                
+                callBack(true, resultDict)
+                
+            }
         }
         
         task.resume()
     }
 }
+
 
 
