@@ -288,41 +288,32 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G8p-Ns-Awd">
-                                <rect key="frame" x="10" y="608.5" width="394" height="20.5"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UjK-S6-wcT">
-                                <rect key="frame" x="10" y="639" width="394" height="60"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="UjK-S6-wcT">
+                                <rect key="frame" x="10" y="512" width="394" height="291"/>
                                 <subviews>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5vI-nT-3XV">
-                                        <rect key="frame" x="0.0" y="0.0" width="276" height="60"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G8p-Ns-Awd">
+                                        <rect key="frame" x="0.0" y="0.0" width="394" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Amount in EUR" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5vI-nT-3XV">
+                                        <rect key="frame" x="0.0" y="20.5" width="394" height="34"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="decimalPad" returnKeyType="continue"/>
                                     </textField>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Convert to :" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oLf-wu-SQP">
+                                        <rect key="frame" x="0.0" y="54.5" width="394" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                     <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0T1-sA-6cn">
-                                        <rect key="frame" x="276" y="0.0" width="118" height="60"/>
+                                        <rect key="frame" x="0.0" y="75" width="394" height="216"/>
                                     </pickerView>
                                 </subviews>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="60" id="CDL-kn-FJF"/>
-                                    <constraint firstItem="5vI-nT-3XV" firstAttribute="width" secondItem="UjK-S6-wcT" secondAttribute="width" multiplier="0.7" id="spY-z0-hcX"/>
-                                </constraints>
                             </stackView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z3z-uN-qEF">
-                                <rect key="frame" x="10" y="719" width="394" height="64"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="64" id="7X7-vA-cm7"/>
-                                </constraints>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="filled" title="Convert"/>
-                                <connections>
-                                    <action selector="convertPressed:" destination="lTj-dm-Am3" eventType="touchUpInside" id="aQL-HK-92i"/>
-                                </connections>
-                            </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Result" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mYZ-t9-G9j">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-- XXX" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mYZ-t9-G9j">
                                 <rect key="frame" x="10" y="144" width="394" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
@@ -332,24 +323,17 @@
                         <viewLayoutGuide key="safeArea" id="F1J-Vy-mGm"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="z3z-uN-qEF" firstAttribute="top" secondItem="UjK-S6-wcT" secondAttribute="bottom" constant="20" id="1UF-k7-JLF"/>
-                            <constraint firstItem="F1J-Vy-mGm" firstAttribute="bottom" secondItem="z3z-uN-qEF" secondAttribute="bottom" constant="30" id="3SZ-ap-ici"/>
-                            <constraint firstItem="G8p-Ns-Awd" firstAttribute="leading" secondItem="F1J-Vy-mGm" secondAttribute="leading" constant="10" id="7Dy-i1-Ilt"/>
+                            <constraint firstItem="UjK-S6-wcT" firstAttribute="leading" secondItem="F1J-Vy-mGm" secondAttribute="leading" constant="10" id="5cN-qB-mWv"/>
+                            <constraint firstItem="F1J-Vy-mGm" firstAttribute="trailing" secondItem="UjK-S6-wcT" secondAttribute="trailing" constant="10" id="Jl7-Vb-qId"/>
                             <constraint firstItem="mYZ-t9-G9j" firstAttribute="top" secondItem="F1J-Vy-mGm" secondAttribute="top" constant="100" id="OL7-lN-apL"/>
                             <constraint firstItem="mYZ-t9-G9j" firstAttribute="leading" secondItem="F1J-Vy-mGm" secondAttribute="leading" constant="10" id="T3g-UG-6qQ"/>
-                            <constraint firstItem="F1J-Vy-mGm" firstAttribute="trailing" secondItem="G8p-Ns-Awd" secondAttribute="trailing" constant="10" id="UWG-M8-QrE"/>
                             <constraint firstItem="F1J-Vy-mGm" firstAttribute="trailing" secondItem="mYZ-t9-G9j" secondAttribute="trailing" constant="10" id="Vse-NX-XaF"/>
-                            <constraint firstItem="z3z-uN-qEF" firstAttribute="leading" secondItem="F1J-Vy-mGm" secondAttribute="leading" constant="10" id="XfW-xH-B5E"/>
-                            <constraint firstItem="F1J-Vy-mGm" firstAttribute="trailing" secondItem="UjK-S6-wcT" secondAttribute="trailing" constant="10" id="diS-bn-Ehe"/>
-                            <constraint firstItem="UjK-S6-wcT" firstAttribute="top" secondItem="G8p-Ns-Awd" secondAttribute="bottom" constant="10" id="hpv-fC-dOX"/>
-                            <constraint firstItem="F1J-Vy-mGm" firstAttribute="trailing" secondItem="z3z-uN-qEF" secondAttribute="trailing" constant="10" id="ygU-Ud-mBU"/>
-                            <constraint firstItem="UjK-S6-wcT" firstAttribute="leading" secondItem="F1J-Vy-mGm" secondAttribute="leading" constant="10" id="zi4-pg-KYL"/>
+                            <constraint firstItem="F1J-Vy-mGm" firstAttribute="bottom" secondItem="UjK-S6-wcT" secondAttribute="bottom" constant="10" id="fw8-Pi-ola"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Change" image="dollarsign.circle" catalog="system" selectedImage="dollarsign.circle.fill" id="1bH-R2-WCc"/>
                     <connections>
                         <outlet property="amountTextField" destination="5vI-nT-3XV" id="cmo-BH-30s"/>
-                        <outlet property="convertButton" destination="z3z-uN-qEF" id="uto-ol-vHc"/>
                         <outlet property="currencyPickerView" destination="0T1-sA-6cn" id="dgt-Lj-Mw0"/>
                         <outlet property="resultLabel" destination="mYZ-t9-G9j" id="XU5-C7-LQo"/>
                         <outlet property="typeHereLabel" destination="G8p-Ns-Awd" id="CZ2-AW-MWh"/>

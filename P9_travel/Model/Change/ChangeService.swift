@@ -20,7 +20,12 @@ class ChangeService {
     
     private var lastFetchingRatesDate: Date?
     
-    var currencies = [String]()
+    var currencies = [String]() {
+        didSet {
+            currencies = currencies.sorted(by: { $0 < $1 })
+        }
+    }
+    
     private var currenciesWithRates = [String: Any]() {
         didSet {
             currencies.removeAll()
@@ -68,19 +73,14 @@ class ChangeService {
     }
     
     func convert(amount: String?, to currency: String?) -> String {
-        guard let stringAmount = amount else {
-            return "Error"
-        }
-
+        guard let stringAmount = amount else { return "Error" }
         guard let amount = Double(stringAmount) else { return "Error" }
-
-
+        
         guard let currency = currency else { return "Error" }
-        guard let rate = currenciesWithRates[currency] as? Double else {
-            return "Error"
-        }
+        guard let rate = currenciesWithRates[currency] as? Double else { return "Error" }
+        
         let result = amount * rate
         
-        return String(result)
+        return String(format: "%.2f", result)
     }
 }
