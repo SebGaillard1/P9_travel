@@ -73,11 +73,11 @@ class ChangeService {
     }
     
     func convert(amount: String?, to currency: String?) -> String {
-        guard let stringAmount = amount else { return "Error" }
-        guard let amount = Double(stringAmount) else { return "Error" }
+        guard let stringAmount = amount else { return "0" }
+        guard let amount = Double(stringAmount) else { return "0" }
         
-        guard let currency = currency else { return "Error" }
-        guard let rate = currenciesWithRates[currency] as? Double else { return "Error" }
+        guard let currency = currency else { return "0" }
+        guard let rate = currenciesWithRates[currency] as? Double else { return "0" }
         
         let result = amount * rate
         
