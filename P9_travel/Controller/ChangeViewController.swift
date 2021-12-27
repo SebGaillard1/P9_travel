@@ -13,9 +13,7 @@ class ChangeViewController: UIViewController {
     @IBOutlet weak var amountTextField: UITextField!
     @IBOutlet weak var convertButton: UIButton!
     @IBOutlet weak var currencyPickerView: UIPickerView!
-    
-    var rates: Rates?
-    
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -33,13 +31,13 @@ class ChangeViewController: UIViewController {
     }
     
     private func refreshRates() {
-        ChangeService.shared.getRates { success, changeRates in
+        ChangeService.shared.getRates { success, _ in
             if !success {
                 let ac = UIAlertController(title: "Error", message: "Failed to fetch rates", preferredStyle: .alert)
                 ac.addAction(UIAlertAction(title: "OK", style: .default))
                 self.present(ac, animated: true)
             } else {
-                self.rates = changeRates
+                self.currencyPickerView.reloadAllComponents()
             }
         }
     }
@@ -53,15 +51,15 @@ extension ChangeViewController: UIPickerViewDataSource, UIPickerViewDelegate {
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return Currencies.currenciesArray.count
+        return ChangeService.shared.currencies.count
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return Currencies.currenciesArray[row]
+        return ChangeService.shared.currencies[row]
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        print("\(row) selected")
+        resultLabel.text = ChangeService.shared.convert(amount: amountTextField.text, to: ChangeService.shared.currencies[row])
     }
 }
 

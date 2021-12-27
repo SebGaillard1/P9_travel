@@ -20,7 +20,17 @@ class ChangeService {
     
     private var lastFetchingRatesDate: Date?
     
-    func getRates(callBack: @escaping (Bool, Rates?) -> Void) {
+    var currencies = [String]()
+    private var currenciesWithRates = [String: Any]() {
+        didSet {
+            currencies.removeAll()
+            for (currency, _) in currenciesWithRates {
+                currencies.append(currency)
+            }
+        }
+    }
+    
+    func getRates(callBack: @escaping (Bool, [String: Any]?) -> Void) {
         if lastFetchingRatesDate == nil || lastFetchingRatesDate != Date() {
             
         let request = ChangeService.createRatesRequest()
@@ -28,30 +38,23 @@ class ChangeService {
         task?.cancel()
         task = rateSession.dataTask(with: request) { data, response, error in
             DispatchQueue.main.async {
-                guard let data = data, error == nil else {
-                    callBack(false, nil)
-                    return
-                }
+                guard let data = data, error == nil else { callBack(false, nil); return }
                 
-                guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
-                    callBack(false, nil)
-                    return
-                }
+                guard let response = response as? HTTPURLResponse, response.statusCode == 200 else { callBack(false, nil); return }
                 
-                guard let responseJSON = try? JSONDecoder().decode(RateData.self, from: data)
-                else {
-                    callBack(false, nil)
-                    return
-                }
+                guard let resultDict = try? JSONSerialization.jsonObject(with: data, options: .mutableLeaves) as? [String: Any] else { callBack(false, nil); return }
+
+                guard let rates = resultDict["rates"] as? [String: Any] else { return }
+                
+                self.currenciesWithRates = rates
                 
                 let dateFormatter = DateFormatter()
                 dateFormatter.dateFormat = "yyyy-MM-dd"
-                self.lastFetchingRatesDate = dateFormatter.date(from: responseJSON.date)
+                //self.lastFetchingRatesDate = dateFormatter.date(from: responseJSON.date)
 //                print(responseJSON.date)
 //                print(self.lastFetchingRatesDate)
 //                print(Date())
                 
-                let rates = responseJSON.rates
                 callBack(true, rates)
             }
         }
@@ -62,5 +65,22 @@ class ChangeService {
     
     private static func createRatesRequest() -> URLRequest {
         return URLRequest(url: URL(string: "\(url)?access_key=\(apiKey)")!)
+    }
+    
+    func convert(amount: String?, to currency: String?) -> String {
+        guard let stringAmount = amount else {
+            return "Error"
+        }
+
+        guard let amount = Double(stringAmount) else { return "Error" }
+
+
+        guard let currency = currency else { return "Error" }
+        guard let rate = currenciesWithRates[currency] as? Double else {
+            return "Error"
+        }
+        let result = amount * rate
+        
+        return String(result)
     }
 }
