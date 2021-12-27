@@ -12,6 +12,8 @@ class ChangeViewController: UIViewController {
     @IBOutlet weak var typeHereLabel: UILabel!
     @IBOutlet weak var amountTextField: UITextField!
     @IBOutlet weak var currencyPickerView: UIPickerView!
+    
+    private var currentRow = 0
         
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,7 +21,11 @@ class ChangeViewController: UIViewController {
         currencyPickerView.delegate = self
         currencyPickerView.dataSource = self
         
+        amountTextField.delegate = self // Unused
+        
         typeHereLabel.text = "Amount to convert:"
+        
+        amountTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
         
         refreshRates()
     }
@@ -35,9 +41,21 @@ class ChangeViewController: UIViewController {
             }
         }
     }
+    
+    @objc private func textFieldDidChange(_ textField: UITextField) {
+        checkForForbiddenCharacters()
+        updateResultTextField()
+    }
+    
+    private func updateResultTextField() {
+        resultLabel.text = "\(ChangeService.shared.convert(amount: amountTextField.text, to: ChangeService.shared.currencies[currentRow])) \(ChangeService.shared.currencies[currentRow])"
+
+    }
+    
+    private func checkForForbiddenCharacters() {
+        amountTextField.text = amountTextField.text?.onlyNumbers
+    }
 }
-
-
 
 extension ChangeViewController: UIPickerViewDataSource, UIPickerViewDelegate {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -53,7 +71,21 @@ extension ChangeViewController: UIPickerViewDataSource, UIPickerViewDelegate {
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        resultLabel.text = "\(ChangeService.shared.convert(amount: amountTextField.text, to: ChangeService.shared.currencies[row])) \(ChangeService.shared.currencies[row])"
+        currentRow = row
+        updateResultTextField()
+    }
+}
+
+extension ChangeViewController: UITextFieldDelegate {
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+    }
+}
+
+extension String {
+    var onlyNumbers: String {
+        let charset = CharacterSet.punctuationCharacters.union(CharacterSet.decimalDigits).inverted
+
+        return components(separatedBy: charset).joined()
     }
 }
 
