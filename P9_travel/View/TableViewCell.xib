@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="languageCell" id="zXJ-Kd-bdf" customClass="LanguageCell" customModule="P9_travel" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="80"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="zXJ-Kd-bdf" id="YuN-gi-F3N">
+                <rect key="frame" x="0.0" y="0.0" width="375" height="80"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dRC-eQ-ikd">
+                        <rect key="frame" x="20" y="11" width="335" height="21"/>
+                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bmT-HQ-QC3">
+                        <rect key="frame" x="20" y="40" width="335" height="21"/>
+                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="bmT-HQ-QC3" firstAttribute="leading" secondItem="YuN-gi-F3N" secondAttribute="leadingMargin" id="44f-Gi-5Bl"/>
+                    <constraint firstItem="bmT-HQ-QC3" firstAttribute="trailing" secondItem="YuN-gi-F3N" secondAttribute="trailingMargin" id="S1v-6I-vlK"/>
+                    <constraint firstItem="dRC-eQ-ikd" firstAttribute="trailing" secondItem="YuN-gi-F3N" secondAttribute="trailingMargin" id="Ym3-3U-3iZ"/>
+                    <constraint firstItem="bmT-HQ-QC3" firstAttribute="top" secondItem="dRC-eQ-ikd" secondAttribute="bottom" constant="8" id="ZF9-gt-3rO"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="bmT-HQ-QC3" secondAttribute="bottom" constant="8" id="dtH-aA-WWv"/>
+                    <constraint firstItem="dRC-eQ-ikd" firstAttribute="leading" secondItem="YuN-gi-F3N" secondAttribute="leadingMargin" id="oPd-9k-Df2"/>
+                    <constraint firstItem="dRC-eQ-ikd" firstAttribute="top" secondItem="YuN-gi-F3N" secondAttribute="topMargin" id="rQJ-Ah-VTT"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="codeLabel" destination="bmT-HQ-QC3" id="lEM-fi-jsI"/>
+                <outlet property="languageLabel" destination="dRC-eQ-ikd" id="Uea-QO-c45"/>
+            </connections>
+            <point key="canvasLocation" x="-287.19999999999999" y="22.488755622188908"/>
+        </tableViewCell>
+    </objects>
+</document>

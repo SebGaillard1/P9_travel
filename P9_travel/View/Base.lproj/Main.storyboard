@@ -53,6 +53,9 @@
                                 <color key="tintColor" systemColor="labelColor"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Choose language"/>
+                                <connections>
+                                    <segue destination="bNp-Rb-hbg" kind="presentation" identifier="segueToLanguages" id="iOr-ZS-P6j"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="4LI-Vl-RQb"/>
@@ -83,6 +86,41 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EZL-Jd-2kC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="495.6521739130435" y="381.69642857142856"/>
+        </scene>
+        <!--Languages View Controller-->
+        <scene sceneID="y6Q-ky-WfW">
+            <objects>
+                <viewController id="bNp-Rb-hbg" customClass="LanguagesViewController" customModule="P9_travel" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="7We-Hz-cjQ">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="3ez-1h-K9m">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="large" id="p3A-v3-mNO">
+                                <rect key="frame" x="0.0" y="394" width="414" height="54"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </activityIndicatorView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="JgW-yk-y4v"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="3ez-1h-K9m" firstAttribute="top" secondItem="JgW-yk-y4v" secondAttribute="top" id="5Vo-UB-ZSF"/>
+                            <constraint firstItem="JgW-yk-y4v" firstAttribute="trailing" secondItem="3ez-1h-K9m" secondAttribute="trailing" id="7Aa-l3-Lfb"/>
+                            <constraint firstItem="JgW-yk-y4v" firstAttribute="bottom" secondItem="3ez-1h-K9m" secondAttribute="bottom" id="Ahs-3C-w72"/>
+                            <constraint firstItem="3ez-1h-K9m" firstAttribute="leading" secondItem="JgW-yk-y4v" secondAttribute="leading" id="mnc-nS-G2r"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="activityIndicator" destination="p3A-v3-mNO" id="eGR-zG-BaP"/>
+                        <outlet property="languagesTableView" destination="3ez-1h-K9m" id="Rxb-su-wDd"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="BFk-8p-qSc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1289.8550724637682" y="672.99107142857144"/>
         </scene>
         <!--Weather-->
         <scene sceneID="k0p-GM-2Ta">
