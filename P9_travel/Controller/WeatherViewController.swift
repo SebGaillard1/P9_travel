@@ -26,9 +26,14 @@ class WeatherViewController: UIViewController {
     @IBOutlet weak var nyDescriptionLabel: UILabel!
     @IBOutlet weak var nyTempMinLabel: UILabel!
     @IBOutlet weak var nyTempMaxLabel: UILabel!
+        
+    @IBOutlet weak var weatherStackView: UIStackView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        weatherStackView.isHidden = true
+        
         getNewYorkWeather()
     }
     
@@ -52,6 +57,7 @@ class WeatherViewController: UIViewController {
             if success {
                 // On affiche les données météo
                 self.updateWeatherViews(with: weather!)
+                self.weatherStackView.isHidden = false
             } else {
                 self.presentErrorMessage(with: "Failed to fetch weather")
             }
