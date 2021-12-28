@@ -19,8 +19,13 @@ class WeatherViewController: UIViewController {
     @IBOutlet weak var pressureLabel: UILabel!
     @IBOutlet weak var humidityLabel: UILabel!
     
-    @IBOutlet weak var NYWeatherContitionImageView: UIImageView!
-    @IBOutlet weak var NYTempLabel: UILabel!
+    @IBOutlet weak var nyWeatherConditionImageView: UIImageView!
+    @IBOutlet weak var nyTempLabel: UILabel!
+    @IBOutlet weak var nyNameLabel: UILabel!
+    @IBOutlet weak var nyConditionLabel: UILabel!
+    @IBOutlet weak var nyDescriptionLabel: UILabel!
+    @IBOutlet weak var nyTempMinLabel: UILabel!
+    @IBOutlet weak var nyTempMaxLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,8 +61,7 @@ class WeatherViewController: UIViewController {
     private func getNewYorkWeather() {
         WeatherManager.shared.getWeather(cityName: "New+York") { success, NYWeather in
             if success {
-                self.NYWeatherContitionImageView.image = UIImage(systemName: NYWeather!.conditionName)
-                self.NYTempLabel.text = "\(NYWeather!.temperatureString)°C"
+                self.updateNYWeatherViews(with: NYWeather!)
             } else {
                 self.presentErrorMessage(with: "Failed to fetch New York weather")
             }
@@ -74,6 +78,16 @@ class WeatherViewController: UIViewController {
         self.tempMaxLabel.text = "⬆ \(weather.tempMax)°C"
         self.pressureLabel.text = "🔄 \(weather.pressure) hPa"
         self.humidityLabel.text = "💧 \(weather.humidity) %"
+    }
+    
+    private func updateNYWeatherViews(with weather: WeatherModel) {
+        self.nyWeatherConditionImageView.image = UIImage(systemName: weather.conditionName)
+        self.nyTempLabel.text = "🌡 \(weather.temperatureString)°C"
+        self.nyNameLabel.text = "🌆 \(weather.cityName)"
+        self.nyConditionLabel.text = "🌞 \(weather.condition)"
+        self.nyDescriptionLabel.text = "ℹ️ \(weather.description)"
+        self.nyTempMinLabel.text = "⬇ \(weather.tempMin)°C"
+        self.nyTempMaxLabel.text = "⬆ \(weather.tempMax)°C"
     }
     
     private func presentErrorMessage(with error: String) {
