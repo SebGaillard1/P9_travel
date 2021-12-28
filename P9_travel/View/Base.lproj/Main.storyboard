@@ -151,26 +151,51 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="3ez-1h-K9m">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
+                                <rect key="frame" x="0.0" y="50" width="414" height="758"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="large" id="p3A-v3-mNO">
                                 <rect key="frame" x="0.0" y="394" width="414" height="54"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </activityIndicatorView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5p0-7z-GZA">
+                                <rect key="frame" x="10" y="10" width="34" height="34"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="34" id="C0U-5m-7LJ"/>
+                                    <constraint firstAttribute="width" secondItem="5p0-7z-GZA" secondAttribute="height" multiplier="1:1" id="sKP-tM-Rak"/>
+                                </constraints>
+                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="gray" title="X"/>
+                                <connections>
+                                    <action selector="closeButtonTapped:" destination="bNp-Rb-hbg" eventType="touchUpInside" id="HMg-Du-78M"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x1u-tr-bY1">
+                                <rect key="frame" x="186" y="16.5" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="JgW-yk-y4v"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="3ez-1h-K9m" firstAttribute="top" secondItem="JgW-yk-y4v" secondAttribute="top" id="5Vo-UB-ZSF"/>
+                            <constraint firstItem="3ez-1h-K9m" firstAttribute="top" secondItem="JgW-yk-y4v" secondAttribute="top" constant="50" id="5Vo-UB-ZSF"/>
                             <constraint firstItem="JgW-yk-y4v" firstAttribute="trailing" secondItem="3ez-1h-K9m" secondAttribute="trailing" id="7Aa-l3-Lfb"/>
+                            <constraint firstItem="JgW-yk-y4v" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="5p0-7z-GZA" secondAttribute="trailing" symbolic="YES" id="8r5-6e-sOE"/>
                             <constraint firstItem="JgW-yk-y4v" firstAttribute="bottom" secondItem="3ez-1h-K9m" secondAttribute="bottom" id="Ahs-3C-w72"/>
+                            <constraint firstItem="x1u-tr-bY1" firstAttribute="centerY" secondItem="5p0-7z-GZA" secondAttribute="centerY" id="HDS-bB-tYI"/>
+                            <constraint firstItem="5p0-7z-GZA" firstAttribute="leading" secondItem="JgW-yk-y4v" secondAttribute="leading" constant="10" id="OrW-Fa-DiY"/>
+                            <constraint firstItem="x1u-tr-bY1" firstAttribute="centerX" secondItem="7We-Hz-cjQ" secondAttribute="centerX" id="ezE-8P-sGk"/>
+                            <constraint firstItem="5p0-7z-GZA" firstAttribute="top" secondItem="JgW-yk-y4v" secondAttribute="top" constant="10" id="m7o-nY-bLh"/>
                             <constraint firstItem="3ez-1h-K9m" firstAttribute="leading" secondItem="JgW-yk-y4v" secondAttribute="leading" id="mnc-nS-G2r"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="activityIndicator" destination="p3A-v3-mNO" id="eGR-zG-BaP"/>
                         <outlet property="languagesTableView" destination="3ez-1h-K9m" id="Rxb-su-wDd"/>
+                        <outlet property="titleLabel" destination="x1u-tr-bY1" id="n7O-eo-uUK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BFk-8p-qSc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

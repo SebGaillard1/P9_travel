@@ -10,6 +10,7 @@ import UIKit
 class LanguagesViewController: UIViewController {
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var languagesTableView: UITableView!
+    @IBOutlet weak var titleLabel: UILabel!
     
     let cellId = "TableViewCell"
     
@@ -23,6 +24,16 @@ class LanguagesViewController: UIViewController {
         languagesTableView.dataSource = self
         languagesTableView.delegate = self
         languagesTableView.register(UINib.init(nibName: cellId, bundle: nil), forCellReuseIdentifier: cellId)
+        
+        if isTargetLanguage {
+            titleLabel.text = "Choose target language"
+        } else {
+            titleLabel.text = "Choose source language"
+        }
+    }
+    
+    @IBAction func closeButtonTapped(_ sender: Any) {
+        dismiss(animated: true)
     }
 }
 
