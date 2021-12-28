@@ -45,6 +45,7 @@ class TranslationManager {
     var supportedLanguages = [TranslationLanguage]()
     var textToTranslate: String?
     var targetLanguageCode: String?
+    var sourceLanguageCode: String?
     
     private func makeRequest(usingTranslationAPI api: TranslationAPI, urlParams: [String: String], callBack: @escaping (Bool, [String: Any]?) -> Void) {
         // We have to add the URL parameters to our dictionnary. We use URLComponents for that
@@ -124,10 +125,9 @@ class TranslationManager {
         urlParam["target"] = targetLanguage
         urlParam["format"] = "text"
       
-        // A utiliser lors de l'implementation de la détection du langage source
-//        if let sourceLanguage = sourceLanguageCode {
-//            urlParam["source"] = sourceLanguage
-//        }
+        if let sourceLanguage = sourceLanguageCode {
+            urlParam["source"] = sourceLanguage
+        }
         
         makeRequest(usingTranslationAPI: .translate, urlParams: urlParam) { success, data in
             guard let data = data else { callBack(nil); return }

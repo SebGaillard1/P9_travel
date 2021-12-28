@@ -24,20 +24,12 @@ class WeatherManager {
         
         task = weatherTask.dataTask(with: request) { data, response, error in
             DispatchQueue.main.async {
-                guard let data = data, error == nil else {
-                    callBack(false, nil)
-                    return
-                }
+                guard let data = data, error == nil else { callBack(false, nil); return }
                 
-                guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
-                    callBack(false, nil)
-                    return
-                }
+                guard let response = response as? HTTPURLResponse, response.statusCode == 200 else { callBack(false, nil); return }
                 
-                guard let responseJSON = try? JSONDecoder().decode(WeatherData.self, from: data) else {
-                    callBack(false, nil)
-                    return
-                }
+                guard let responseJSON = try? JSONDecoder().decode(WeatherData.self, from: data) else { callBack(false, nil); return }
+                
                 let id = responseJSON.weather[0].id
                 let temp = responseJSON.main.temp
                 let city = responseJSON.name

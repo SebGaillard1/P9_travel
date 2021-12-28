@@ -13,8 +13,13 @@ class LanguagesViewController: UIViewController {
     
     let cellId = "TableViewCell"
     
+    var isTargetLanguage = false
+    
+    var delegate: LanguageViewControllerDelegate!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         languagesTableView.dataSource = self
         languagesTableView.delegate = self
         languagesTableView.register(UINib.init(nibName: cellId, bundle: nil), forCellReuseIdentifier: cellId)
@@ -63,9 +68,18 @@ extension LanguagesViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        TranslationManager.shared.targetLanguageCode = TranslationManager.shared.supportedLanguages[indexPath.row].code
+        if isTargetLanguage {
+            TranslationManager.shared.targetLanguageCode = TranslationManager.shared.supportedLanguages[indexPath.row].code
+        } else {
+            TranslationManager.shared.sourceLanguageCode = TranslationManager.shared.supportedLanguages[indexPath.row].code
+        }
+        
+        delegate.sendLanguage(language: TranslationManager.shared.supportedLanguages[indexPath.row].name!)
         self.dismiss(animated: true)
     }
-    
-    
+}
+
+protocol LanguageViewControllerDelegate {
+    func sendLanguage(language: String)
+
 }

@@ -43,7 +43,7 @@
                                     <action selector="tradButtonPressed:" destination="uTt-fh-Z7b" eventType="touchUpInside" id="mUA-eg-cng"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F3d-EA-Jx7">
+                            <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F3d-EA-Jx7">
                                 <rect key="frame" x="101" y="432.5" width="212" height="31"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="31" id="JKz-dt-v2T"/>
@@ -51,7 +51,7 @@
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="gray" title="Choose destination language"/>
                                 <connections>
-                                    <segue destination="bNp-Rb-hbg" kind="presentation" identifier="segueToLanguages" id="iOr-ZS-P6j"/>
+                                    <action selector="destinationLanguageButton:" destination="uTt-fh-Z7b" eventType="touchUpInside" id="rxj-Cc-bg9"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UNf-3e-pJz">
@@ -61,6 +61,9 @@
                                 </constraints>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="gray" title="Choose source language"/>
+                                <connections>
+                                    <action selector="sourceLanguageButton:" destination="uTt-fh-Z7b" eventType="touchUpInside" id="6JG-Au-S8E"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="4LI-Vl-RQb"/>
@@ -85,11 +88,12 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Translation" image="character.bubble" catalog="system" selectedImage="character.bubble.fill" id="4gg-ML-wlI"/>
                     <connections>
-                        <outlet property="destinationLanguageButton" destination="F3d-EA-Jx7" id="KDR-Mx-fEB"/>
                         <outlet property="outputTextView" destination="Tzy-41-KnW" id="gpf-fW-wj5"/>
                         <outlet property="sourceLanguageButton" destination="UNf-3e-pJz" id="w1l-MB-WRr"/>
+                        <outlet property="targetLanguageButton" destination="F3d-EA-Jx7" id="KDR-Mx-fEB"/>
                         <outlet property="tradButton" destination="biK-1C-CdZ" id="CNu-1Z-Vdh"/>
                         <outlet property="userInputTextView" destination="3xL-lf-SEX" id="DzY-FC-yYe"/>
+                        <segue destination="bNp-Rb-hbg" kind="presentation" identifier="segueToSelectLanguage" id="247-G6-PTf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EZL-Jd-2kC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
