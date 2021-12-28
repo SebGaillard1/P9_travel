@@ -13,11 +13,14 @@ class TranslationViewController: UIViewController, LanguageViewControllerDelegat
     @IBOutlet weak var tradButton: UIButton!
     @IBOutlet weak var sourceLanguageButton: UIButton!
     @IBOutlet weak var targetLanguageButton: UIButton!
+    @IBOutlet weak var detectLanguageButton: UIButton!
     
     private var buttonTag = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        checkForLanguages()
     }
     
     @IBAction func sourceLanguageButton(_ sender: UIButton) {
@@ -33,6 +36,21 @@ class TranslationViewController: UIViewController, LanguageViewControllerDelegat
     @IBAction func tradButtonPressed(_ sender: Any) {
         TranslationManager.shared.textToTranslate = userInputTextView.text
         startTranslation()
+    }
+    
+    @IBAction func detectLanguageButtonPressed(_ sender: UIButton) {
+        if userInputTextView.text != "" {
+            // Faire une waiting animation !!!!
+            TranslationManager.shared.detectLanguage(forText: userInputTextView.text) { language in
+                if let language = language {
+                    self.sourceLanguageButton.setTitle(language, for: .normal)
+                } else {
+                    let ac = UIAlertController(title: "Detect language", message: "Failed to detect language!", preferredStyle: .alert)
+                    ac.addAction(UIAlertAction(title: "OK", style: .default))
+                    self.present(ac, animated: true)
+                }
+            }
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -67,6 +85,25 @@ class TranslationViewController: UIViewController, LanguageViewControllerDelegat
             sourceLanguageButton.setTitle(language, for: .normal)
         } else {
             targetLanguageButton.setTitle(language, for: .normal)
+        }
+    }
+    
+    private func checkForLanguages() {
+        if TranslationManager.shared.supportedLanguages.isEmpty {
+            fetchSupportedLanguages()
+        }
+    }
+    
+    private func fetchSupportedLanguages() {
+        TranslationManager.shared.fetchSupportedLanguages { success in
+            if success {
+            } else {
+                // Inform : Failed to fetch languages
+                let ac = UIAlertController(title: "Supported languages", message: "Something went wrong! Impossible to fetch supported languages", preferredStyle: .alert)
+                ac.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
+                    self.dismiss(animated: true)
+                }))
+            }
         }
     }
     

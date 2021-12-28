@@ -26,6 +26,9 @@
                                         </constraints>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="tinted" image="text.viewfinder" catalog="system" title=" Detect language"/>
+                                        <connections>
+                                            <action selector="detectLanguageButtonPressed:" destination="uTt-fh-Z7b" eventType="touchUpInside" id="l22-M1-Cgx"/>
+                                        </connections>
                                     </button>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="eKk-tm-ZKe">
                                         <rect key="frame" x="0.0" y="56" width="394" height="34"/>
@@ -54,7 +57,7 @@
                                         <color key="backgroundColor" systemColor="systemGray5Color"/>
                                         <color key="textColor" systemColor="labelColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="no" spellCheckingType="no" returnKeyType="done" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
                                     </textView>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="GSQ-ne-IID">
                                         <rect key="frame" x="0.0" y="380.5" width="394" height="34"/>
@@ -126,6 +129,7 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Translation" image="character.bubble" catalog="system" selectedImage="character.bubble.fill" id="4gg-ML-wlI"/>
                     <connections>
+                        <outlet property="detectLanguageButton" destination="cmt-DT-LGR" id="sRn-V5-HLJ"/>
                         <outlet property="outputTextView" destination="Tzy-41-KnW" id="gpf-fW-wj5"/>
                         <outlet property="sourceLanguageButton" destination="UNf-3e-pJz" id="w1l-MB-WRr"/>
                         <outlet property="targetLanguageButton" destination="F3d-EA-Jx7" id="KDR-Mx-fEB"/>

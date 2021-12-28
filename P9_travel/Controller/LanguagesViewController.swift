@@ -23,31 +23,6 @@ class LanguagesViewController: UIViewController {
         languagesTableView.dataSource = self
         languagesTableView.delegate = self
         languagesTableView.register(UINib.init(nibName: cellId, bundle: nil), forCellReuseIdentifier: cellId)
-        
-        checkForLanguages()
-    }
-    
-    private func checkForLanguages() {
-        if TranslationManager.shared.supportedLanguages.isEmpty {
-            fetchSupportedLanguages()
-        }
-    }
-    
-    private func fetchSupportedLanguages() {
-        TranslationManager.shared.fetchSupportedLanguages { success in
-            if success {
-                // Display language in table view
-                DispatchQueue.main.async {
-                    self.languagesTableView.reloadData()
-                }
-            } else {
-                // Inform : Failed to fetch languages
-                let ac = UIAlertController(title: "Supported languages", message: "Something went wrong! Impossible to fetch supported languages", preferredStyle: .alert)
-                ac.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
-                    self.dismiss(animated: true)
-                }))
-            }
-        }
     }
 }
 
@@ -81,5 +56,4 @@ extension LanguagesViewController: UITableViewDataSource, UITableViewDelegate {
 
 protocol LanguageViewControllerDelegate {
     func sendLanguage(language: String)
-
 }

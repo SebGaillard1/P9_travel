@@ -153,6 +153,46 @@ class TranslationManager {
         }
     }
     
+    func detectLanguage(forText text: String, callBack: @escaping (String?) -> Void) {
+        let urlParams = ["key": apiKey, "q": text]
+        
+        makeRequest(usingTranslationAPI: .detectLanguage, urlParams: urlParams) { success, data in
+            guard let data = data else { callBack(nil); return }
+            
+            if let data = data["data"] as? [String: Any], let detections = data["detections"] as? [[[String: Any]]] {
+                var detectedLanguages = [String]()
+                
+                for detection in detections {
+                    for currentDetection in detection {
+                        if let language = currentDetection["language"] as? String {
+                            detectedLanguages.append(language)
+                        }
+                    }
+                }
+                
+                if detectedLanguages.count > 0 {
+                    self.sourceLanguageCode = detectedLanguages[0]
+                    
+                    let languageName = self.getLanguageName(fromCode: self.sourceLanguageCode)
+                    callBack(languageName)
+                } else {
+                    callBack(nil)
+                }
+            }
+        }
+    }
+    
+    private func getLanguageName(fromCode code: String?) -> String? {
+        if let code = code {
+            for language in supportedLanguages {
+                if language.code == code {
+                    return language.name
+                }
+            }
+        }
+        
+        return nil
+    }
 }
 
 struct TranslationLanguage {
