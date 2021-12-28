@@ -14,13 +14,10 @@ class TranslationViewController: UIViewController, LanguageViewControllerDelegat
     @IBOutlet weak var sourceLanguageButton: UIButton!
     @IBOutlet weak var targetLanguageButton: UIButton!
     
-    
     private var buttonTag = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // Do any additional setup after loading the view.
     }
     
     @IBAction func sourceLanguageButton(_ sender: UIButton) {
