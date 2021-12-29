@@ -39,6 +39,9 @@ class WeatherViewController: UIViewController {
             viewToHide.isHidden = true
         }
         
+        let tap = UITapGestureRecognizer(target: view, action: #selector(UIView.endEditing))
+        view.addGestureRecognizer(tap)
+                
         getNewYorkWeather()
     }
     

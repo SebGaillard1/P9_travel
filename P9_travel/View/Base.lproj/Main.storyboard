@@ -407,6 +407,7 @@
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="bu7-to-7iR"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="bu7-to-7iR" firstAttribute="bottom" secondItem="dpd-Sp-qtK" secondAttribute="bottom" constant="10" id="8A7-Ff-6kJ"/>
                             <constraint firstItem="dpd-Sp-qtK" firstAttribute="leading" secondItem="bu7-to-7iR" secondAttribute="leading" constant="10" id="EIX-pG-z47"/>
@@ -485,7 +486,7 @@
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Amount" textAlignment="right" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="5vI-nT-3XV">
+                                                    <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Amount" textAlignment="right" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="5vI-nT-3XV">
                                                         <rect key="frame" x="0.0" y="27.5" width="394" height="34"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="decimalPad" returnKeyType="continue"/>
@@ -537,9 +538,6 @@
                             <constraint firstItem="FdI-gk-lzh" firstAttribute="leading" secondItem="EeY-Qn-9Ru" secondAttribute="leading" id="vhr-sL-8do"/>
                             <constraint firstItem="1a6-fJ-Hez" firstAttribute="top" secondItem="FdI-gk-lzh" secondAttribute="bottom" constant="20" id="xjF-9c-mwb"/>
                         </constraints>
-                        <connections>
-                            <outletCollection property="gestureRecognizers" destination="twR-dr-0bv" appends="YES" id="Olv-Ck-QtM"/>
-                        </connections>
                     </view>
                     <tabBarItem key="tabBarItem" title="Change" image="dollarsign.circle" catalog="system" selectedImage="dollarsign.circle.fill" id="1bH-R2-WCc"/>
                     <connections>
@@ -550,7 +548,6 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HgN-Ua-Urr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer id="twR-dr-0bv"/>
             </objects>
             <point key="canvasLocation" x="495.6521739130435" y="-437.27678571428572"/>
         </scene>

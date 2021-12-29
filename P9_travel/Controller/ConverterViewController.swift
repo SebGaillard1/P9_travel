@@ -43,7 +43,7 @@ class ConverterViewController: UIViewController {
                 self.present(ac, animated: true)
             } else {
                 self.currencyPickerView.reloadAllComponents()
-                self.amountTextField.isUserInteractionEnabled = false
+                self.amountTextField.isUserInteractionEnabled = true
             }
         }
     }
