@@ -77,7 +77,7 @@ class WeatherViewController: UIViewController {
     private func updateWeatherViews(with weather: WeatherModel) {
         self.weatherConditionImageView.image = UIImage(systemName: weather.conditionName)
         self.tempLabel.text = "🌡 \(weather.temperatureString)°C"
-        self.cityNameLabel.text = "🌆 \(weather.cityName)"
+        self.cityNameLabel.text = weather.cityName
         self.conditionLabel.text = "🌞 \(weather.condition)"
         self.descriptionLabel.text = "ℹ️ \(weather.description)"
         self.tempMinLabel.text = "⬇ \(weather.tempMin)°C"
@@ -89,7 +89,7 @@ class WeatherViewController: UIViewController {
     private func updateNYWeatherViews(with weather: WeatherModel) {
         self.nyWeatherConditionImageView.image = UIImage(systemName: weather.conditionName)
         self.nyTempLabel.text = "🌡 \(weather.temperatureString)°C"
-        self.nyNameLabel.text = "🌆 \(weather.cityName)"
+        self.nyNameLabel.text = weather.cityName
         self.nyConditionLabel.text = "🌞 \(weather.condition)"
         self.nyDescriptionLabel.text = "ℹ️ \(weather.description)"
         self.nyTempMinLabel.text = "⬇ \(weather.tempMin)°C"
