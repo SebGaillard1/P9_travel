@@ -36,11 +36,14 @@ class ConverterViewController: UIViewController {
     private func refreshRates() {
         ConverterManager.shared.getRates { success, _ in
             if !success {
+                self.amountTextField.isUserInteractionEnabled = false
+                
                 let ac = UIAlertController(title: "Error", message: "Failed to fetch rates", preferredStyle: .alert)
                 ac.addAction(UIAlertAction(title: "OK", style: .default))
                 self.present(ac, animated: true)
             } else {
                 self.currencyPickerView.reloadAllComponents()
+                self.amountTextField.isUserInteractionEnabled = false
             }
         }
     }
@@ -51,8 +54,9 @@ class ConverterViewController: UIViewController {
     }
     
     private func updateResultTextField() {
-        resultLabel.text = "\(ConverterManager.shared.convert(amount: amountTextField.text, to: ConverterManager.shared.currencies[currentRow])) USD"
-
+        if !ConverterManager.shared.currencies.isEmpty {
+            resultLabel.text = "\(ConverterManager.shared.convert(amount: amountTextField.text, to: ConverterManager.shared.currencies[currentRow])) USD"
+        }
     }
     
     private func checkForForbiddenCharacters() {

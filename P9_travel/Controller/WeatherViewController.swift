@@ -33,19 +33,17 @@ class WeatherViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        cityNameTextField.delegate = self
+        
         for viewToHide in weatherViewsToHide {
             viewToHide.isHidden = true
         }
-        
         
         getNewYorkWeather()
     }
     
     @IBAction func searchPressed(_ sender: UIButton) {
-        getWeather()
-        
-        cityNameTextField.endEditing(true)
-        cityNameTextField.text = nil
+        searchCityWeather()
     }
     
     private func formatCityName() -> String {
@@ -57,8 +55,15 @@ class WeatherViewController: UIViewController {
         return backToString
     }
     
+    private func searchCityWeather() {
+        getWeather()
+        
+        cityNameTextField.endEditing(true)
+        cityNameTextField.text = nil
+    }
+    
     private func getWeather() {
-        WeatherManager.shared.getWeather(cityName: formatCityName()) { success, weather in
+        WeatherManager.shared.fetchWeather(cityName: formatCityName()) { success, weather in
             if success {
                 // On affiche les données météo
                 self.updateWeatherViews(with: weather!)
@@ -69,7 +74,7 @@ class WeatherViewController: UIViewController {
     }
     
     private func getNewYorkWeather() {
-        WeatherManager.shared.getWeather(cityName: "New+York") { success, NYWeather in
+        WeatherManager.shared.fetchWeather(cityName: "New+York") { success, NYWeather in
             if success {
                 self.updateNYWeatherViews(with: NYWeather!)
             } else {
@@ -115,5 +120,13 @@ class WeatherViewController: UIViewController {
             viewToHide.isHidden = false
         }
         searchWeatherLabel.isHidden = true
+    }
+}
+
+extension WeatherViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        searchCityWeather()
+        
+        return true
     }
 }
