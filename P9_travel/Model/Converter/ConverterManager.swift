@@ -7,8 +7,8 @@
 
 import Foundation
 
-class ChangeService {
-    static var shared = ChangeService()
+class ConverterManager {
+    static var shared = ConverterManager()
     private init() {}
     
     private static let apiKey = "cb9d3af8ca4fc45716d10314a50abb19"
@@ -38,7 +38,7 @@ class ChangeService {
     func getRates(callBack: @escaping (Bool, [String: Any]?) -> Void) {
         if alreadyFetchRatesToday() { callBack(true, currenciesWithRates); return } // Si on a déja les données, on renvoies les données locales
         
-        let request = ChangeService.createRatesRequest()
+        let request = ConverterManager.createRatesRequest()
         
         task?.cancel()
         task = rateSession.dataTask(with: request) { data, response, error in

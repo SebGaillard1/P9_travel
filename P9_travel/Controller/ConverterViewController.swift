@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ChangeViewController: UIViewController {
+class ConverterViewController: UIViewController {
     @IBOutlet weak var resultLabel: UILabel!
     @IBOutlet weak var typeHereLabel: UILabel!
     @IBOutlet weak var amountTextField: UITextField!
@@ -34,7 +34,7 @@ class ChangeViewController: UIViewController {
     }
     
     private func refreshRates() {
-        ChangeService.shared.getRates { success, _ in
+        ConverterManager.shared.getRates { success, _ in
             if !success {
                 let ac = UIAlertController(title: "Error", message: "Failed to fetch rates", preferredStyle: .alert)
                 ac.addAction(UIAlertAction(title: "OK", style: .default))
@@ -51,7 +51,7 @@ class ChangeViewController: UIViewController {
     }
     
     private func updateResultTextField() {
-        resultLabel.text = "\(ChangeService.shared.convert(amount: amountTextField.text, to: ChangeService.shared.currencies[currentRow])) USD"
+        resultLabel.text = "\(ConverterManager.shared.convert(amount: amountTextField.text, to: ConverterManager.shared.currencies[currentRow])) USD"
 
     }
     
@@ -60,17 +60,17 @@ class ChangeViewController: UIViewController {
     }
 }
 
-extension ChangeViewController: UIPickerViewDataSource, UIPickerViewDelegate {
+extension ConverterViewController: UIPickerViewDataSource, UIPickerViewDelegate {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return ChangeService.shared.currencies.count
+        return ConverterManager.shared.currencies.count
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return ChangeService.shared.currencies[row]
+        return ConverterManager.shared.currencies[row]
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
@@ -79,7 +79,7 @@ extension ChangeViewController: UIPickerViewDataSource, UIPickerViewDelegate {
     }
 }
 
-extension ChangeViewController: UITextFieldDelegate {
+extension ConverterViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
     }

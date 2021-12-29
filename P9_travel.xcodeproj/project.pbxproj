@@ -14,10 +14,10 @@
 		576CC1B8276516A5000DD587 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 576CC1B6276516A5000DD587 /* LaunchScreen.storyboard */; };
 		576CC1C3276516A5000DD587 /* P9_travelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 576CC1C2276516A5000DD587 /* P9_travelTests.swift */; };
 		57CA9EB2277A7AD600EBE3BB /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57CA9EB1277A7AD600EBE3BB /* Extensions.swift */; };
-		57CE11392778A53100431236 /* ChangeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57CE11382778A53100431236 /* ChangeViewController.swift */; };
+		57CE11392778A53100431236 /* ConverterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57CE11382778A53100431236 /* ConverterViewController.swift */; };
 		57CE113B2778A54900431236 /* TranslationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57CE113A2778A54900431236 /* TranslationViewController.swift */; };
 		57CE113D2778A55300431236 /* WeatherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57CE113C2778A55300431236 /* WeatherViewController.swift */; };
-		57CE113F2778A74900431236 /* ChangeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57CE113E2778A74900431236 /* ChangeService.swift */; };
+		57CE113F2778A74900431236 /* ConverterManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57CE113E2778A74900431236 /* ConverterManager.swift */; };
 		57CE116D2778F87600431236 /* WeatherManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57CE116C2778F87600431236 /* WeatherManager.swift */; };
 		57CE116F2778FC6D00431236 /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57CE116E2778FC6D00431236 /* Weather.swift */; };
 		57CE11712778FD7D00431236 /* WeatherModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57CE11702778FD7D00431236 /* WeatherModel.swift */; };
@@ -48,10 +48,10 @@
 		576CC1BE276516A5000DD587 /* P9_travelTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = P9_travelTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		576CC1C2276516A5000DD587 /* P9_travelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = P9_travelTests.swift; sourceTree = "<group>"; };
 		57CA9EB1277A7AD600EBE3BB /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
-		57CE11382778A53100431236 /* ChangeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeViewController.swift; sourceTree = "<group>"; };
+		57CE11382778A53100431236 /* ConverterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConverterViewController.swift; sourceTree = "<group>"; };
 		57CE113A2778A54900431236 /* TranslationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslationViewController.swift; sourceTree = "<group>"; };
 		57CE113C2778A55300431236 /* WeatherViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherViewController.swift; sourceTree = "<group>"; };
-		57CE113E2778A74900431236 /* ChangeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeService.swift; sourceTree = "<group>"; };
+		57CE113E2778A74900431236 /* ConverterManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConverterManager.swift; sourceTree = "<group>"; };
 		57CE116C2778F87600431236 /* WeatherManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherManager.swift; sourceTree = "<group>"; };
 		57CE116E2778FC6D00431236 /* Weather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
 		57CE11702778FD7D00431236 /* WeatherModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherModel.swift; sourceTree = "<group>"; };
@@ -134,7 +134,7 @@
 		57CE11362778A22500431236 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				57CE11382778A53100431236 /* ChangeViewController.swift */,
+				57CE11382778A53100431236 /* ConverterViewController.swift */,
 				57CE113A2778A54900431236 /* TranslationViewController.swift */,
 				57CE113C2778A55300431236 /* WeatherViewController.swift */,
 				57CE11752779F05300431236 /* LanguagesViewController.swift */,
@@ -147,17 +147,17 @@
 			children = (
 				57CE11722779CE1400431236 /* Traduction */,
 				57CE116B2778F82700431236 /* Weather */,
-				57CE116A2778E60600431236 /* Change */,
+				57CE116A2778E60600431236 /* Converter */,
 			);
 			path = Model;
 			sourceTree = "<group>";
 		};
-		57CE116A2778E60600431236 /* Change */ = {
+		57CE116A2778E60600431236 /* Converter */ = {
 			isa = PBXGroup;
 			children = (
-				57CE113E2778A74900431236 /* ChangeService.swift */,
+				57CE113E2778A74900431236 /* ConverterManager.swift */,
 			);
-			path = Change;
+			path = Converter;
 			sourceTree = "<group>";
 		};
 		57CE116B2778F82700431236 /* Weather */ = {
@@ -286,11 +286,11 @@
 				57CE113B2778A54900431236 /* TranslationViewController.swift in Sources */,
 				57CE11792779F93000431236 /* LanguageCell.swift in Sources */,
 				57CE116F2778FC6D00431236 /* Weather.swift in Sources */,
-				57CE11392778A53100431236 /* ChangeViewController.swift in Sources */,
+				57CE11392778A53100431236 /* ConverterViewController.swift in Sources */,
 				576CC1AE276516A4000DD587 /* SceneDelegate.swift in Sources */,
 				57CA9EB2277A7AD600EBE3BB /* Extensions.swift in Sources */,
 				57CE116D2778F87600431236 /* WeatherManager.swift in Sources */,
-				57CE113F2778A74900431236 /* ChangeService.swift in Sources */,
+				57CE113F2778A74900431236 /* ConverterManager.swift in Sources */,
 				57CE11762779F05300431236 /* LanguagesViewController.swift in Sources */,
 				57CE11712778FD7D00431236 /* WeatherModel.swift in Sources */,
 			);
