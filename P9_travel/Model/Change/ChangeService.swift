@@ -11,7 +11,7 @@ class ChangeService {
     static var shared = ChangeService()
     private init() {}
     
-    private static let apiKey = "1d085c2a08943cb28106d51cefcfee5e"
+    private static let apiKey = "cb9d3af8ca4fc45716d10314a50abb19"
     private static let url = "http://data.fixer.io/api/latest"
     
     private var task: URLSessionDataTask?

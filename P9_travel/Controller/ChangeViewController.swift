@@ -18,6 +18,9 @@ class ChangeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let tap = UITapGestureRecognizer(target: view, action: #selector(UIView.endEditing))
+        view.addGestureRecognizer(tap)
+        
         currencyPickerView.delegate = self
         currencyPickerView.dataSource = self
         
@@ -77,7 +80,7 @@ extension ChangeViewController: UIPickerViewDataSource, UIPickerViewDelegate {
 }
 
 extension ChangeViewController: UITextFieldDelegate {
-    func textFieldDidBeginEditing(_ textField: UITextField) {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
     }
 }
-
