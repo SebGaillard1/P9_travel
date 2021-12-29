@@ -57,6 +57,17 @@ class ConverterViewController: UIViewController {
     
     private func checkForForbiddenCharacters() {
         amountTextField.text = amountTextField.text?.onlyNumbers
+        amountTextField.text = amountTextField.text?.replacingOccurrences(of: ",", with: ".")
+        
+        // Remove . if there is already one
+        if let i = amountTextField.text?.firstIndex(of: ".") {
+            var stringCopy = amountTextField.text
+            stringCopy?.remove(at: i)
+            
+            if stringCopy?.contains(".") == true {
+                amountTextField.text?.removeLast()
+            }
+        }
     }
 }
 
