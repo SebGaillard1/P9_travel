@@ -8,7 +8,6 @@
 import UIKit
 
 class LanguagesViewController: UIViewController {
-    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var languagesTableView: UITableView!
     @IBOutlet weak var titleLabel: UILabel!
     

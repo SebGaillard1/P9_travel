@@ -94,9 +94,7 @@
                                             <constraint firstAttribute="height" constant="54" id="obw-Xq-Q2o"/>
                                         </constraints>
                                         <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="filled" title="Translate">
-                                            <color key="baseBackgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        </buttonConfiguration>
+                                        <buttonConfiguration key="configuration" style="filled" title="Translate"/>
                                         <connections>
                                             <action selector="tradButtonPressed:" destination="uTt-fh-Z7b" eventType="touchUpInside" id="mUA-eg-cng"/>
                                         </connections>
@@ -161,10 +159,6 @@
                                 <rect key="frame" x="0.0" y="50" width="414" height="758"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
-                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="large" id="p3A-v3-mNO">
-                                <rect key="frame" x="0.0" y="394" width="414" height="54"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </activityIndicatorView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5p0-7z-GZA">
                                 <rect key="frame" x="10" y="10" width="34" height="34"/>
                                 <constraints>
@@ -200,7 +194,6 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="activityIndicator" destination="p3A-v3-mNO" id="eGR-zG-BaP"/>
                         <outlet property="languagesTableView" destination="3ez-1h-K9m" id="Rxb-su-wDd"/>
                         <outlet property="titleLabel" destination="x1u-tr-bY1" id="n7O-eo-uUK"/>
                     </connections>
@@ -236,14 +229,17 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="394" height="34"/>
                                                 <subviews>
                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Find a city" textAlignment="right" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="at9-uD-X4R">
-                                                        <rect key="frame" x="0.0" y="0.0" width="343.5" height="34"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="343" height="34"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="search" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
                                                     </textField>
                                                     <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e07-tH-lmW">
-                                                        <rect key="frame" x="348.5" y="0.0" width="45.5" height="34"/>
+                                                        <rect key="frame" x="348" y="0.0" width="46" height="34"/>
+                                                        <color key="tintColor" systemColor="labelColor"/>
                                                         <state key="normal" title="Button"/>
-                                                        <buttonConfiguration key="configuration" style="plain" image="magnifyingglass" catalog="system"/>
+                                                        <buttonConfiguration key="configuration" style="plain" image="magnifyingglass" catalog="system">
+                                                            <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" weight="bold"/>
+                                                        </buttonConfiguration>
                                                         <connections>
                                                             <action selector="searchPressed:" destination="V9b-DQ-lNn" eventType="touchUpInside" id="QJl-Tn-QaP"/>
                                                         </connections>
@@ -269,7 +265,7 @@
                                                         <subviews>
                                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="questionmark.circle" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="Gg8-lq-M6Q">
                                                                 <rect key="frame" x="0.0" y="0.5" width="217" height="114.5"/>
-                                                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <color key="tintColor" systemColor="labelColor"/>
                                                             </imageView>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="center" text="--°C" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="npN-JQ-8Xt">
                                                                 <rect key="frame" x="177" y="0.0" width="217" height="115.5"/>
@@ -356,7 +352,7 @@
                                                         <subviews>
                                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="questionmark.circle" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="DKZ-bP-2rV">
                                                                 <rect key="frame" x="60" y="0.5" width="77" height="76"/>
-                                                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <color key="tintColor" systemColor="labelColor"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" secondItem="DKZ-bP-2rV" secondAttribute="height" id="nHM-T6-vbq"/>
                                                                 </constraints>
@@ -560,7 +556,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <color key="selectedImageTintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="selectedImageTintColor" systemColor="labelColor"/>
                     </tabBar>
                     <connections>
                         <segue destination="lTj-dm-Am3" kind="relationship" relationship="viewControllers" id="EeR-iM-9vZ"/>
