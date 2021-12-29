@@ -27,20 +27,25 @@ class WeatherViewController: UIViewController {
     @IBOutlet weak var nyTempMinLabel: UILabel!
     @IBOutlet weak var nyTempMaxLabel: UILabel!
         
-    @IBOutlet weak var weatherStackView: UIStackView!
+    @IBOutlet var weatherViewsToHide: [UIStackView]!
+    @IBOutlet weak var searchWeatherLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        weatherStackView.isHidden = true
+        for viewToHide in weatherViewsToHide {
+            viewToHide.isHidden = true
+        }
+        
         
         getNewYorkWeather()
     }
     
     @IBAction func searchPressed(_ sender: UIButton) {
-        cityNameTextField.endEditing(true)
-        
         getWeather()
+        
+        cityNameTextField.endEditing(true)
+        cityNameTextField.text = nil
     }
     
     private func formatCityName() -> String {
@@ -57,7 +62,6 @@ class WeatherViewController: UIViewController {
             if success {
                 // On affiche les données météo
                 self.updateWeatherViews(with: weather!)
-                self.weatherStackView.isHidden = false
             } else {
                 self.presentErrorMessage(with: "Failed to fetch weather")
             }
@@ -75,8 +79,12 @@ class WeatherViewController: UIViewController {
     }
     
     private func updateWeatherViews(with weather: WeatherModel) {
+        if searchWeatherLabel.isHidden == false {
+            firstUIUpdate()
+        }
+        
         self.weatherConditionImageView.image = UIImage(systemName: weather.conditionName)
-        self.tempLabel.text = "🌡 \(weather.temperatureString)°C"
+        self.tempLabel.text = "\(weather.temperatureString)°C"
         self.cityNameLabel.text = weather.cityName
         self.conditionLabel.text = "🌞 \(weather.condition)"
         self.descriptionLabel.text = "ℹ️ \(weather.description)"
@@ -88,7 +96,7 @@ class WeatherViewController: UIViewController {
     
     private func updateNYWeatherViews(with weather: WeatherModel) {
         self.nyWeatherConditionImageView.image = UIImage(systemName: weather.conditionName)
-        self.nyTempLabel.text = "🌡 \(weather.temperatureString)°C"
+        self.nyTempLabel.text = "\(weather.temperatureString)°C"
         self.nyNameLabel.text = weather.cityName
         self.nyConditionLabel.text = "🌞 \(weather.condition)"
         self.nyDescriptionLabel.text = "ℹ️ \(weather.description)"
@@ -100,5 +108,12 @@ class WeatherViewController: UIViewController {
         let ac = UIAlertController(title: "Error", message: error, preferredStyle: .alert)
         ac.addAction(UIAlertAction(title: "OK", style: .default))
         self.present(ac, animated: true)
+    }
+    
+    private func firstUIUpdate() {
+        for viewToHide in weatherViewsToHide {
+            viewToHide.isHidden = false
+        }
+        searchWeatherLabel.isHidden = true
     }
 }
