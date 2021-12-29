@@ -30,6 +30,8 @@ class WeatherViewController: UIViewController {
     @IBOutlet var weatherViewsToHide: [UIStackView]!
     @IBOutlet weak var searchWeatherLabel: UILabel!
     
+    @IBOutlet weak var nyWeatherStackView: UIStackView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -38,6 +40,7 @@ class WeatherViewController: UIViewController {
         for viewToHide in weatherViewsToHide {
             viewToHide.isHidden = true
         }
+        nyWeatherStackView.isHidden = true
         
         let tap = UITapGestureRecognizer(target: view, action: #selector(UIView.endEditing))
         view.addGestureRecognizer(tap)
@@ -103,6 +106,8 @@ class WeatherViewController: UIViewController {
     }
     
     private func updateNYWeatherViews(with weather: WeatherModel) {
+        nyWeatherStackView.isHidden = false
+        
         self.nyWeatherConditionImageView.image = UIImage(systemName: weather.conditionName)
         self.nyTempLabel.text = "\(weather.temperatureString)°C"
         self.nyNameLabel.text = weather.cityName

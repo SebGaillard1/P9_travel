@@ -61,10 +61,13 @@ extension LanguagesViewController: UITableViewDataSource, UITableViewDelegate {
         }
         
         delegate.sendLanguage(language: TranslationManager.shared.supportedLanguages[indexPath.row].name!)
+        delegate.enableTransButton()
         self.dismiss(animated: true)
     }
 }
 
 protocol LanguageViewControllerDelegate {
     func sendLanguage(language: String)
+    
+    func enableTransButton()
 }

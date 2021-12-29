@@ -19,6 +19,9 @@ class TranslationViewController: UIViewController, LanguageViewControllerDelegat
     
     override func viewDidLoad() {
         super.viewDidLoad()
+                
+        let tap = UITapGestureRecognizer(target: view, action: #selector(UIView.endEditing))
+        view.addGestureRecognizer(tap)
         
         checkForLanguages()
     }
@@ -88,6 +91,10 @@ class TranslationViewController: UIViewController, LanguageViewControllerDelegat
         }
     }
     
+    func enableTransButton() {
+        tradButton.isEnabled = true
+    }
+    
     private func checkForLanguages() {
         if TranslationManager.shared.supportedLanguages.isEmpty {
             fetchSupportedLanguages()
@@ -97,14 +104,16 @@ class TranslationViewController: UIViewController, LanguageViewControllerDelegat
     private func fetchSupportedLanguages() {
         TranslationManager.shared.fetchSupportedLanguages { success in
             if success {
+                self.sourceLanguageButton.isEnabled = true
+                self.targetLanguageButton.isEnabled = true
             } else {
                 // Inform : Failed to fetch languages
                 let ac = UIAlertController(title: "Supported languages", message: "Something went wrong! Impossible to fetch supported languages", preferredStyle: .alert)
                 ac.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
                     self.dismiss(animated: true)
                 }))
+                self.present(ac, animated: true)
             }
         }
     }
-    
 }
