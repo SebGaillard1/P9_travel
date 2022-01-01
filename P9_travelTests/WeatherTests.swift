@@ -9,85 +9,125 @@ import XCTest
 @testable import P9_travel
 
 class WeatherTests: XCTestCase {
+    
+    var weather: WeatherManager!
+    
     func testGetWeatherShouldPostFailedCallBackIfNoData() {
         // Given
-        let weatherManager = WeatherManager(session: URLSessionFake(data: nil, response: nil, error: nil))
+        TestURLProtocol.loadingHandler = { request in
+            let data: Data? = nil
+            let response: HTTPURLResponse = FakeResponseData.responseKO
+            let error: Error? = nil
+            return (response, data, error)
+        }
+        let weatherManager = createSession()
 
         // When
         let expectation = XCTestExpectation(description: "Wait for queue change.")
-        weatherManager.fetchWeather(cityName: "Paris", callBack: { success, data in
+        weatherManager.fetchWeather(cityName: "", callBack: { success, data in
             // Then
             XCTAssertFalse(success)
             XCTAssertNil(data)
             expectation.fulfill()
         })
 
-        wait(for: [expectation], timeout: 0.01)
+        wait(for: [expectation], timeout: 0.1)
     }
 
     func testGetWeatherShouldPostFailedCallbackIfError() {
         // Given
-        let weatherManager = WeatherManager(session: URLSessionFake(data: FakeResponseData.weatherData, response: FakeResponseData.responseOK, error: FakeResponseData.error))
+        TestURLProtocol.loadingHandler = { request in
+            let data: Data? = nil
+            let response: HTTPURLResponse = FakeResponseData.responseKO
+            let error: Error? = FakeResponseData.error
+            return (response, data, error)
+        }
+        let weatherManager = createSession()
         
         // When
         let expectation = XCTestExpectation(description: "Wait for queue change.")
-        weatherManager.fetchWeather(cityName: "Paris", callBack: { success, data in
+        weatherManager.fetchWeather(cityName: "", callBack: { success, data in
             // Then
             XCTAssertFalse(success)
             XCTAssertNil(data)
             expectation.fulfill()
         })
 
-        wait(for: [expectation], timeout: 0.01)
+        wait(for: [expectation], timeout: 0.1)
     }
 
     func testGetWeatherShouldPostFailedCallbackIfIncorrectResponse() {
         // Given
-        let weatherManager = WeatherManager(session: URLSessionFake(data: FakeResponseData.weatherData, response: FakeResponseData.responseKO, error: nil))
+        TestURLProtocol.loadingHandler = { request in
+            let data: Data? = FakeResponseData.weatherData
+            let response: HTTPURLResponse = FakeResponseData.responseKO
+            let error: Error? = nil
+            return (response, data, error)
+        }
+        let weatherManager = createSession()
 
         // When
         let expectation = XCTestExpectation(description: "Wait for queue change.")
-        weatherManager.fetchWeather(cityName: "Paris", callBack: { success, data in
+        weatherManager.fetchWeather(cityName: "", callBack: { success, data in
             // Then
             XCTAssertFalse(success)
             XCTAssertNil(data)
             expectation.fulfill()
         })
 
-        wait(for: [expectation], timeout: 0.01)
+        wait(for: [expectation], timeout: 0.1)
     }
     
     func testGetRatesShouldPostFailedCallbackIfIncorrectData() {
         // Given
-        let weatherManager = WeatherManager(session: URLSessionFake(data: FakeResponseData.incorrectData, response: FakeResponseData.responseOK, error: nil))
+        TestURLProtocol.loadingHandler = { request in
+            let data: Data? = FakeResponseData.incorrectData
+            let response: HTTPURLResponse = FakeResponseData.responseOK
+            let error: Error? = nil
+            return (response, data, error)
+        }
+        let weatherManager = createSession()
 
         // When
         let expectation = XCTestExpectation(description: "Wait for queue change.")
-        weatherManager.fetchWeather(cityName: "Paris", callBack: { success, data in
+        weatherManager.fetchWeather(cityName: "", callBack: { success, data in
                 // Then
                 XCTAssertFalse(success)
                 XCTAssertNil(data)
                 expectation.fulfill()
         })
 
-        wait(for: [expectation], timeout: 0.01)
+        wait(for: [expectation], timeout: 0.1)
     }
 
 
     func testGetWeatherShouldPostSuccessCallbackIfNoErrorAndCorrectData() {
         // Given
-        let weatherManager = WeatherManager(session: URLSessionFake(data: FakeResponseData.weatherData, response: FakeResponseData.responseOK, error: nil))
+        TestURLProtocol.loadingHandler = { request in
+            let data: Data? = FakeResponseData.weatherData
+            let response: HTTPURLResponse = FakeResponseData.responseOK
+            let error: Error? = nil
+            return (response, data, error)
+        }
+        let weatherManager = createSession()
 
         // When
         let expectation = XCTestExpectation(description: "Wait for queue change.")
-        weatherManager.fetchWeather(cityName: "Paris", callBack: { success, data in
+        weatherManager.fetchWeather(cityName: "", callBack: { success, data in
             // Then
             XCTAssertTrue(success)
             XCTAssertNotNil(data)
             expectation.fulfill()
         })
 
-        wait(for: [expectation], timeout: 0.01)
+        wait(for: [expectation], timeout: 0.1)
+    }
+  
+    func createSession() -> WeatherManager {
+        let configuration = URLSessionConfiguration.ephemeral
+        configuration.protocolClasses = [TestURLProtocol.self]
+        let session = URLSession(configuration: configuration)
+        return WeatherManager(session: session)
     }
 
 }

@@ -8,24 +8,9 @@
 import XCTest
 @testable import P9_travel
 
-class ConverterTest2: XCTestCase {
+class ConverterTests: XCTestCase {
     
     var converter: ConverterManager!
-    
-//    override func setUp() {
-//        super.setUp()
-//        TestURLProtocol.loadingHandler = { request in
-//            let response: HTTPURLResponse = FakeResponseData.responseOK
-//            let error: Error? = nil
-//            let data: Data? = FakeResponseData.ratesData
-//            return (response, data, error)
-//        }
-//        let configuration = URLSessionConfiguration.ephemeral
-//        configuration.protocolClasses = [TestURLProtocol.self]
-//        let session = URLSession(configuration: configuration)
-//        converter = ConverterManager(session: session)
-//    }
-    
     
     func testGetRatesShouldPostFailesCallbackIfError() {
         // Given
@@ -143,18 +128,13 @@ class ConverterTest2: XCTestCase {
 
         wait(for: [expectation], timeout: 0.01)
     }
-    
-    
-    
-    
-    
+
     func createSession() -> ConverterManager {
         let configuration = URLSessionConfiguration.ephemeral
         configuration.protocolClasses = [TestURLProtocol.self]
         let session = URLSession(configuration: configuration)
         return ConverterManager(session: session)
     }
-    
 }
 
 

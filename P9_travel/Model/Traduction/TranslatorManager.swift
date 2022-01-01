@@ -60,7 +60,7 @@ class TranslatorManager {
     }
     
     // We create the request with the url + params and then, perform the request
-    func makeRequest(usingTranslationAPI api: TranslationAPI, urlParams: [String: String], callBack: @escaping (Bool, [String: Any]?) -> Void) {
+    private func makeRequest(usingTranslationAPI api: TranslationAPI, urlParams: [String: String], callBack: @escaping (Bool, [String: Any]?) -> Void) {
         guard var components = URLComponents(string: api.getURL()) else {
             callBack(false, nil)
             return
