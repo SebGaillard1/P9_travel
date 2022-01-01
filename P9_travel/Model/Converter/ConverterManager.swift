@@ -87,11 +87,11 @@ class ConverterManager {
         guard let currency = currency else { return "-" }
         guard let rate = currenciesWithRates[currency] as? Double else { return "-" }
         
-        let eurToUserCurrency = amountDouble * (1/rate)
+        let userAmount = amountDouble * (1/rate)
         
         guard let USDRateAsDouble = currenciesWithRates["USD"] as? Double else { return "-" }
         
-        let finalResult = eurToUserCurrency * USDRateAsDouble
+        let finalResult = userAmount * USDRateAsDouble
         
         return String(format: "%.2f", finalResult)
     }
