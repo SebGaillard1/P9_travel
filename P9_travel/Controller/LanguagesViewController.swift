@@ -38,13 +38,13 @@ class LanguagesViewController: UIViewController {
 
 extension LanguagesViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return TranslationManager.shared.supportedLanguages.count
+        return TranslatorManager.shared.supportedLanguages.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "TableViewCell", for: indexPath) as? LanguageCell else { return UITableViewCell() }
         
-        let language = TranslationManager.shared.supportedLanguages[indexPath.row]
+        let language = TranslatorManager.shared.supportedLanguages[indexPath.row]
         
         cell.languageLabel.text = language.name ?? ""
         cell.codeLabel.text = language.code ?? ""
@@ -54,12 +54,12 @@ extension LanguagesViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if isTargetLanguage {
-            TranslationManager.shared.targetLanguageCode = TranslationManager.shared.supportedLanguages[indexPath.row].code
+            TranslatorManager.shared.targetLanguageCode = TranslatorManager.shared.supportedLanguages[indexPath.row].code
         } else {
-            TranslationManager.shared.sourceLanguageCode = TranslationManager.shared.supportedLanguages[indexPath.row].code
+            TranslatorManager.shared.sourceLanguageCode = TranslatorManager.shared.supportedLanguages[indexPath.row].code
         }
         
-        delegate.sendLanguage(language: TranslationManager.shared.supportedLanguages[indexPath.row].name!)
+        delegate.sendLanguage(language: TranslatorManager.shared.supportedLanguages[indexPath.row].name!)
         delegate.enableTransButton()
         self.dismiss(animated: true)
     }

@@ -37,14 +37,14 @@ class TranslationViewController: UIViewController, LanguageViewControllerDelegat
     }
     
     @IBAction func tradButtonPressed(_ sender: Any) {
-        TranslationManager.shared.textToTranslate = userInputTextView.text
+        TranslatorManager.shared.textToTranslate = userInputTextView.text
         startTranslation()
     }
     
     @IBAction func detectLanguageButtonPressed(_ sender: UIButton) {
         if userInputTextView.text != "" {
             // Faire une waiting animation !!!!
-            TranslationManager.shared.detectLanguage(forText: userInputTextView.text) { language in
+            TranslatorManager.shared.detectLanguage(forText: userInputTextView.text) { language in
                 if let language = language {
                     self.sourceLanguageButton.setTitle(language, for: .normal)
                 } else {
@@ -70,7 +70,7 @@ class TranslationViewController: UIViewController, LanguageViewControllerDelegat
     }
     
     private func startTranslation() {
-        TranslationManager.shared.translate { translation in
+        TranslatorManager.shared.translate { translation in
             if translation != nil {
                 // Success, we show the translation
                 DispatchQueue.main.async {
@@ -96,13 +96,13 @@ class TranslationViewController: UIViewController, LanguageViewControllerDelegat
     }
     
     private func checkForLanguages() {
-        if TranslationManager.shared.supportedLanguages.isEmpty {
+        if TranslatorManager.shared.supportedLanguages.isEmpty {
             fetchSupportedLanguages()
         }
     }
     
     private func fetchSupportedLanguages() {
-        TranslationManager.shared.fetchSupportedLanguages { success in
+        TranslatorManager.shared.fetchSupportedLanguages { success in
             if success {
                 self.sourceLanguageButton.isEnabled = true
                 self.targetLanguageButton.isEnabled = true

@@ -11,18 +11,23 @@ class WeatherManager {
     static var shared = WeatherManager()
     private init() {}
     
-    private let openWeatherApiURL = "https://api.openweathermap.org/data/2.5/weather?&units=metric&appid=4b82d7831968c1f714ed9fad3f72b620"
+    private let openWeatherApiURL = "https://api.openweathermap.org/data/2.5/weather?&units=metric"
+    private let apiKey = "4b82d7831968c1f714ed9fad3f72b620"
     
     private var task: URLSessionDataTask?
     
-    private var weatherTask = URLSession(configuration: .default)
+    private var session = URLSession(configuration: .default)
+    
+    init(session: URLSession) {
+        self.session = session
+    }
         
     func fetchWeather(cityName: String?, callBack: @escaping (Bool, WeatherModel?) -> Void) {
-        let request = URLRequest(url: URL(string: "\(openWeatherApiURL)&q=\(cityName!)") ?? URL(string: "\(openWeatherApiURL)&q=\("Paris")")!)
+        let request = URLRequest(url: URL(string: "\(openWeatherApiURL)&appid=\(apiKey)&q=\(cityName!)") ?? URL(string: "\(openWeatherApiURL)&q=\("")")!)
         
         task?.cancel()
         
-        task = weatherTask.dataTask(with: request) { data, response, error in
+        task = session.dataTask(with: request) { data, response, error in
             DispatchQueue.main.async {
                 guard let data = data, error == nil else { callBack(false, nil); return }
                 

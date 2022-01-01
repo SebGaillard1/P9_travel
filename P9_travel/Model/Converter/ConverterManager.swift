@@ -16,7 +16,11 @@ class ConverterManager {
     
     private var task: URLSessionDataTask?
     
-    private var rateSession = URLSession(configuration: .default)
+    private var session = URLSession(configuration: .default)
+    
+    init(session: URLSession) {
+        self.session = session
+    }
     
     private var lastFetchingRatesDate: Date?
     
@@ -41,7 +45,7 @@ class ConverterManager {
         let request = ConverterManager.createRatesRequest()
         
         task?.cancel()
-        task = rateSession.dataTask(with: request) { data, response, error in
+        task = session.dataTask(with: request) { data, response, error in
             DispatchQueue.main.async {
                 guard let data = data, error == nil else { callBack(false, nil); return }
                 
@@ -76,7 +80,7 @@ class ConverterManager {
         return URLRequest(url: URL(string: "\(url)?access_key=\(apiKey)")!)
     }
     
-    func convert(amount: String?, to currency: String?) -> String {
+    func convert(amount: String?, from currency: String?) -> String {
         guard let amountString = amount else { return "-" }
         guard let amountDouble = Double(amountString) else { return "-" }
         

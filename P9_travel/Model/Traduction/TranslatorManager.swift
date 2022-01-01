@@ -36,10 +36,15 @@ enum TranslationAPI {
     }
 }
 
-class TranslationManager {
-    static let shared = TranslationManager()
+struct TranslationLanguage {
+    var code: String?
+    var name: String?
+}
+
+class TranslatorManager {
+    static let shared = TranslatorManager()
     private init() {}
-    
+        
     private let apiKey = "AIzaSyCqKWJpn9tjEuHV0mrx31nl25XUzlIugpg"
 
     var supportedLanguages = [TranslationLanguage]()
@@ -47,8 +52,15 @@ class TranslationManager {
     var targetLanguageCode: String?
     var sourceLanguageCode: String?
     
-    private func makeRequest(usingTranslationAPI api: TranslationAPI, urlParams: [String: String], callBack: @escaping (Bool, [String: Any]?) -> Void) {
-        // We have to add the URL parameters to our dictionnary. We use URLComponents for that
+    private var session = URLSession(configuration: .default)
+    private var task: URLSessionDataTask?
+    
+    init(session: URLSession) {
+        self.session = session
+    }
+    
+    // We create the request with the url + params and then, perform the request
+    func makeRequest(usingTranslationAPI api: TranslationAPI, urlParams: [String: String], callBack: @escaping (Bool, [String: Any]?) -> Void) {
         guard var components = URLComponents(string: api.getURL()) else {
             callBack(false, nil)
             return
@@ -67,10 +79,9 @@ class TranslationManager {
         request.httpMethod = api.getHTTPMethod()
         
         // Now we create a URLSession and a data task
-        // A extraire de la méthode !!!!!!!
-        let session = URLSession(configuration: .default)
-        let task = session.dataTask(with: request) { data, response, error in
-            // TO DO
+        task?.cancel()
+        task = session.dataTask(with: request) { data, response, error in
+            
             DispatchQueue.main.async {
                 guard let data = data, error == nil else { callBack(false, nil); return }
                 
@@ -82,7 +93,7 @@ class TranslationManager {
             }
         }
         
-        task.resume()
+        task?.resume()
     }
     
     func fetchSupportedLanguages(callBack: @escaping (Bool) -> Void) {
@@ -92,6 +103,7 @@ class TranslationManager {
         
         makeRequest(usingTranslationAPI: .supportedLanguages, urlParams: urlParams) { success, data in
             guard let data = data else { callBack(false); return }
+            
             let parseSuccess = self.parseJSONForSupportedLanguages(with: data)
             callBack(parseSuccess)
         }
@@ -194,10 +206,3 @@ class TranslationManager {
         return nil
     }
 }
-
-struct TranslationLanguage {
-    var code: String?
-    var name: String?
-}
-
-

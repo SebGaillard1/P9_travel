@@ -55,7 +55,7 @@ class ConverterViewController: UIViewController {
     
     private func updateResultTextField() {
         if !ConverterManager.shared.currencies.isEmpty {
-            resultLabel.text = "\(ConverterManager.shared.convert(amount: amountTextField.text, to: ConverterManager.shared.currencies[currentRow])) USD"
+            resultLabel.text = "\(ConverterManager.shared.convert(amount: amountTextField.text, from: ConverterManager.shared.currencies[currentRow])) USD"
         }
     }
     

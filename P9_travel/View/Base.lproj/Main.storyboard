@@ -213,8 +213,8 @@
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Weather" translatesAutoresizingMaskIntoConstraints="NO" id="pcd-aC-52M">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="179"/>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Search for a city's weather !" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EGg-5N-QsU">
-                                <rect key="frame" x="10" y="348" width="394" height="36"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Search for a city weather !" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EGg-5N-QsU">
+                                <rect key="frame" x="10" y="273" width="394" height="36"/>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="30"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -231,7 +231,7 @@
                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Find a city" textAlignment="right" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="at9-uD-X4R">
                                                         <rect key="frame" x="0.0" y="0.0" width="343" height="34"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="search" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
+                                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="search" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no" textContentType="address-level2"/>
                                                     </textField>
                                                     <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e07-tH-lmW">
                                                         <rect key="frame" x="348" y="0.0" width="46" height="34"/>
@@ -409,6 +409,7 @@
                             <constraint firstItem="dpd-Sp-qtK" firstAttribute="leading" secondItem="bu7-to-7iR" secondAttribute="leading" constant="10" id="EIX-pG-z47"/>
                             <constraint firstItem="dpd-Sp-qtK" firstAttribute="top" secondItem="pcd-aC-52M" secondAttribute="bottom" constant="10" id="FG6-yl-YxJ"/>
                             <constraint firstItem="pcd-aC-52M" firstAttribute="height" secondItem="eaD-AG-HXg" secondAttribute="height" multiplier="0.2" id="G5V-TA-w0b"/>
+                            <constraint firstItem="EGg-5N-QsU" firstAttribute="top" secondItem="Aea-d7-qgV" secondAttribute="bottom" constant="50" id="Kke-2g-b15"/>
                             <constraint firstItem="pcd-aC-52M" firstAttribute="leading" secondItem="bu7-to-7iR" secondAttribute="leading" id="P2W-4J-LXk"/>
                             <constraint firstItem="TFQ-hA-ASV" firstAttribute="height" secondItem="bu7-to-7iR" secondAttribute="height" multiplier="0.3" id="TbK-J7-QQa"/>
                             <constraint firstItem="Gg8-lq-M6Q" firstAttribute="height" secondItem="bu7-to-7iR" secondAttribute="height" multiplier="0.15" id="UQs-uV-syI"/>
@@ -418,7 +419,6 @@
                             <constraint firstItem="bu7-to-7iR" firstAttribute="trailing" secondItem="dpd-Sp-qtK" secondAttribute="trailing" constant="10" id="mCd-wh-0ka"/>
                             <constraint firstItem="pcd-aC-52M" firstAttribute="trailing" secondItem="bu7-to-7iR" secondAttribute="trailing" id="qaH-00-sV5"/>
                             <constraint firstItem="pcd-aC-52M" firstAttribute="top" secondItem="eaD-AG-HXg" secondAttribute="top" id="uGy-09-2ik"/>
-                            <constraint firstItem="EGg-5N-QsU" firstAttribute="centerY" secondItem="XkH-bb-Aum" secondAttribute="centerY" id="vmW-Gg-W52"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Weather" image="sun.max.circle" catalog="system" selectedImage="sun.max.circle.fill" id="MHQ-Hh-ftx"/>

@@ -1,0 +1,28 @@
+["data": {
+    languages =     (
+                {
+            language = af;
+            name = Afrikaans;
+        },
+                {
+            language = sq;
+            name = Albanais;
+        },
+                {
+            language = de;
+            name = Allemand;
+        },
+                {
+            language = am;
+            name = Amharique;
+        },
+                {
+            language = en;
+            name = Anglais;
+        },
+                {
+            language = ar;
+            name = Arabe;
+        },
+    );
+}]
