@@ -173,6 +173,7 @@ class TranslatorTests: XCTestCase {
         translator = createSession()
         translator.textToTranslate = "Bonjour"
         translator.targetLanguageCode = "en"
+        translator.sourceLanguageCode = "fr"
 
         // When
         let expectation = XCTestExpectation(description: "Wait for queue change.")
@@ -217,6 +218,7 @@ class TranslatorTests: XCTestCase {
         }
         
         translator = createSession()
+        translator.supportedLanguages.append(TranslationLanguage(code: "fr", name: "Français"))
 
         // When
         let expectation = XCTestExpectation(description: "Wait for queue change.")
@@ -228,6 +230,47 @@ class TranslatorTests: XCTestCase {
         wait(for: [expectation], timeout: 0.1)
     }
     
+    func testDetectLanguageShouldPostFailedCallbackIfNoCorrespondingSupportedLanguage() {
+        // Given
+        TestURLProtocol.loadingHandler = { request in
+            let data: Data? = FakeResponseData.detectedLanguage
+            let response: HTTPURLResponse = FakeResponseData.responseOK
+            let error: Error? = nil
+            return (response, data, error)
+        }
+        
+        translator = createSession()
+
+        // When
+        let expectation = XCTestExpectation(description: "Wait for queue change.")
+        translator.detectLanguage(forText: "Bonjour") { language in
+            XCTAssertNil(language)
+            expectation.fulfill()
+        }
+
+        wait(for: [expectation], timeout: 0.1)
+    }
+    
+    func testDetectLanguageShouldPostFailedCallbackIfBadData() {
+        // Given
+        TestURLProtocol.loadingHandler = { request in
+            let data: Data? = FakeResponseData.incorrectData
+            let response: HTTPURLResponse = FakeResponseData.responseOK
+            let error: Error? = nil
+            return (response, data, error)
+        }
+        
+        translator = createSession()
+
+        // When
+        let expectation = XCTestExpectation(description: "Wait for queue change.")
+        translator.detectLanguage(forText: "Bonjour") { language in
+            XCTAssertNil(language)
+            expectation.fulfill()
+        }
+
+        wait(for: [expectation], timeout: 0.1)
+    }
     
     func createSession() -> TranslatorManager {
         let configuration = URLSessionConfiguration.ephemeral

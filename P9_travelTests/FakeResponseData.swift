@@ -35,7 +35,7 @@ class FakeResponseData {
     
     static var detectedLanguage: Data? {
         let bundle = Bundle(for: FakeResponseData.self)
-        let url = bundle.url(forResource: "Translation", withExtension: ".json")!
+        let url = bundle.url(forResource: "DetectedLanguage", withExtension: ".json")!
         return try! Data(contentsOf: url)
     }
     
