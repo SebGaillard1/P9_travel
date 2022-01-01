@@ -60,7 +60,7 @@ class TranslatorManager {
     }
     
     // We create the request with the url + params and then, perform the request
-    private func makeRequest(usingTranslationAPI api: TranslationAPI, urlParams: [String: String], callBack: @escaping (Bool, [String: Any]?) -> Void) {
+    func makeRequest(usingTranslationAPI api: TranslationAPI, urlParams: [String: String], callBack: @escaping (Bool, [String: Any]?) -> Void) {
         guard var components = URLComponents(string: api.getURL()) else {
             callBack(false, nil)
             return
@@ -96,7 +96,7 @@ class TranslatorManager {
         task?.resume()
     }
     
-    func fetchSupportedLanguages(callBack: @escaping (Bool) -> Void) {
+    func getSupportedLanguages(callBack: @escaping (Bool) -> Void) {
         var urlParams = [String: String]()
         urlParams["key"] = apiKey
         urlParams["target"] = Locale.current.languageCode ?? "en"

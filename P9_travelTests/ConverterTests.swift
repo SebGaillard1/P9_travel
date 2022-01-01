@@ -20,10 +20,7 @@ class ConverterTests: XCTestCase {
             let error: Error? = FakeResponseData.error
             return (response, data, error)
         }
-//        let configuration = URLSessionConfiguration.ephemeral
-//        configuration.protocolClasses = [TestURLProtocol.self]
-//        let session = URLSession(configuration: configuration)
-//        let converterManager = ConverterManager(session: session)
+
         let converterManager = createSession()
         
         // When
@@ -134,6 +131,24 @@ class ConverterTests: XCTestCase {
         configuration.protocolClasses = [TestURLProtocol.self]
         let session = URLSession(configuration: configuration)
         return ConverterManager(session: session)
+    }
+    
+    func testGiven10AEDWhenConvertingToUSDThenShouldBe2Dot72() {
+        converter = ConverterManager.shared
+        converter.currenciesWithRates["AED"] = 4.176782
+        converter.currenciesWithRates["USD"] = 1.137145
+        
+        let result = converter.convert(amount: "10", from: "AED")
+        XCTAssertEqual(result, "2.72")
+    }
+    
+    func testGiven10AEDWhenConvertingToUSDThenShouldNotBe2Dot73(){
+        converter = ConverterManager.shared
+        converter.currenciesWithRates["AED"] = 4.176782
+        converter.currenciesWithRates["USD"] = 1.137145
+        
+        let result = converter.convert(amount: "10", from: "AED")
+        XCTAssertNotEqual(result, "2.73")
     }
 }
 

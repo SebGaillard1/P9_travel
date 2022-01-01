@@ -60,7 +60,7 @@ class WeatherViewController: UIViewController {
     }
     
     private func getWeather() {
-        WeatherManager.shared.fetchWeather(cityName: cityNameTextField.text) { success, weather in
+        WeatherManager.shared.getWeather(for: cityNameTextField.text) { success, weather in
             if success {
                 // On affiche les données météo
                 self.updateWeatherViews(with: weather!)
@@ -71,7 +71,7 @@ class WeatherViewController: UIViewController {
     }
     
     private func getNewYorkWeather() {
-        WeatherManager.shared.fetchWeather(cityName: "New+York") { success, NYWeather in
+        WeatherManager.shared.getWeather(for: "New+York") { success, NYWeather in
             if success {
                 self.updateNYWeatherViews(with: NYWeather!)
             } else {

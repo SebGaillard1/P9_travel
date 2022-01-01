@@ -102,7 +102,7 @@ class TranslationViewController: UIViewController, LanguageViewControllerDelegat
     }
     
     private func fetchSupportedLanguages() {
-        TranslatorManager.shared.fetchSupportedLanguages { success in
+        TranslatorManager.shared.getSupportedLanguages { success in
             if success {
                 self.sourceLanguageButton.isEnabled = true
                 self.targetLanguageButton.isEnabled = true

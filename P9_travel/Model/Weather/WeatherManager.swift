@@ -22,8 +22,8 @@ class WeatherManager {
         self.session = session
     }
         
-    func fetchWeather(cityName: String?, callBack: @escaping (Bool, WeatherModel?) -> Void) {
-        let request = URLRequest(url: URL(string: "\(openWeatherApiURL)&appid=\(apiKey)&q=\(format(cityName: cityName))") ?? URL(string: "\(openWeatherApiURL)&q=\("")")!)
+    func getWeather(for city: String?, callBack: @escaping (Bool, WeatherModel?) -> Void) {
+        let request = URLRequest(url: URL(string: "\(openWeatherApiURL)&appid=\(apiKey)&q=\(format(cityName: city))") ?? URL(string: "\(openWeatherApiURL)&q=\("")")!)
         
         task?.cancel()
         

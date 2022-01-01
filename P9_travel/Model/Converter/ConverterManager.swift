@@ -30,7 +30,7 @@ class ConverterManager {
         }
     }
     
-    private var currenciesWithRates = [String: Any]() {
+    var currenciesWithRates = [String: Any]() {
         didSet {
             currencies.removeAll()
             for (currency, _) in currenciesWithRates {
@@ -87,11 +87,11 @@ class ConverterManager {
         guard let currency = currency else { return "-" }
         guard let rate = currenciesWithRates[currency] as? Double else { return "-" }
         
-        let userAmount = amountDouble * (1/rate)
+        let eurToUserCurrency = amountDouble * (1/rate)
         
         guard let USDRateAsDouble = currenciesWithRates["USD"] as? Double else { return "-" }
         
-        let finalResult = userAmount * USDRateAsDouble
+        let finalResult = eurToUserCurrency * USDRateAsDouble
         
         return String(format: "%.2f", finalResult)
     }

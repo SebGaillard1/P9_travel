@@ -24,7 +24,7 @@ class WeatherTests: XCTestCase {
 
         // When
         let expectation = XCTestExpectation(description: "Wait for queue change.")
-        weatherManager.fetchWeather(cityName: "", callBack: { success, data in
+        weatherManager.getWeather(for: "", callBack: { success, data in
             // Then
             XCTAssertFalse(success)
             XCTAssertNil(data)
@@ -46,7 +46,7 @@ class WeatherTests: XCTestCase {
         
         // When
         let expectation = XCTestExpectation(description: "Wait for queue change.")
-        weatherManager.fetchWeather(cityName: "", callBack: { success, data in
+        weatherManager.getWeather(for: "", callBack: { success, data in
             // Then
             XCTAssertFalse(success)
             XCTAssertNil(data)
@@ -68,7 +68,7 @@ class WeatherTests: XCTestCase {
 
         // When
         let expectation = XCTestExpectation(description: "Wait for queue change.")
-        weatherManager.fetchWeather(cityName: "", callBack: { success, data in
+        weatherManager.getWeather(for: "", callBack: { success, data in
             // Then
             XCTAssertFalse(success)
             XCTAssertNil(data)
@@ -90,7 +90,7 @@ class WeatherTests: XCTestCase {
 
         // When
         let expectation = XCTestExpectation(description: "Wait for queue change.")
-        weatherManager.fetchWeather(cityName: "", callBack: { success, data in
+        weatherManager.getWeather(for: "", callBack: { success, data in
                 // Then
                 XCTAssertFalse(success)
                 XCTAssertNil(data)
@@ -113,7 +113,7 @@ class WeatherTests: XCTestCase {
 
         // When
         let expectation = XCTestExpectation(description: "Wait for queue change.")
-        weatherManager.fetchWeather(cityName: "", callBack: { success, data in
+        weatherManager.getWeather(for: "", callBack: { success, data in
             // Then
             XCTAssertTrue(success)
             XCTAssertNotNil(data)
