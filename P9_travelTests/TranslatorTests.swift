@@ -12,7 +12,7 @@ class TranslatorTests: XCTestCase {
 
     var translator: TranslatorManager!
     
-    func testGetSupportedLanguagesShouldPostFailedCallBackIfNoData() {
+    func testMakeRequestShouldPostFailedCallBackIfNoData() {
         // Given
         TestURLProtocol.loadingHandler = { request in
             let data: Data? = nil
@@ -30,10 +30,10 @@ class TranslatorTests: XCTestCase {
             expectation.fulfill()
         }
 
-        wait(for: [expectation], timeout: 0.01)
+        wait(for: [expectation], timeout: 0.1)
     }
 
-    func testGetSupportedLanguagesShouldPostFailedCallbackIfError() {
+    func testMakeRequestShouldPostFailedCallbackIfError() {
         // Given
         TestURLProtocol.loadingHandler = { request in
             let data: Data? = FakeResponseData.supportedLanguages
@@ -52,10 +52,10 @@ class TranslatorTests: XCTestCase {
             expectation.fulfill()
         }
 
-        wait(for: [expectation], timeout: 0.01)
+        wait(for: [expectation], timeout: 0.1)
     }
 
-    func testGetSupportedLanguagesShouldPostFailedCallbackIfIncorrectResponse() {
+    func testMakeRequestShouldPostFailedCallbackIfIncorrectResponse() {
         // Given
         TestURLProtocol.loadingHandler = { request in
             let data: Data? = FakeResponseData.supportedLanguages
@@ -74,10 +74,10 @@ class TranslatorTests: XCTestCase {
             expectation.fulfill()
         }
 
-        wait(for: [expectation], timeout: 0.01)
+        wait(for: [expectation], timeout: 0.1)
     }
 
-    func testGetSupportedLanguagesShouldPostFailedCallbackIfIncorrectData() {
+    func testMakeRequestShouldPostFailedCallbackIfIncorrectData() {
         // Given
         TestURLProtocol.loadingHandler = { request in
             let data: Data? = FakeResponseData.incorrectData
@@ -96,10 +96,10 @@ class TranslatorTests: XCTestCase {
             expectation.fulfill()
         }
 
-        wait(for: [expectation], timeout: 0.01)
+        wait(for: [expectation], timeout: 0.1)
     }
 
-    func testGetLanguagesShouldPostSuccessCallbackIfNoErrorAndCorrectData() {
+    func testMakeRequestShouldPostSuccessCallbackIfNoErrorAndCorrectData() {
         // Given
         TestURLProtocol.loadingHandler = { request in
             let data: Data? = FakeResponseData.supportedLanguages
@@ -118,8 +118,116 @@ class TranslatorTests: XCTestCase {
             expectation.fulfill()
         }
 
-        wait(for: [expectation], timeout: 0.01)
+        wait(for: [expectation], timeout: 0.1)
     }
+    
+    func testGetLanguagesShouldPostSuccessCallbackIfNoErrorAndCorrectData() {
+        // Given
+        TestURLProtocol.loadingHandler = { request in
+            let data: Data? = FakeResponseData.supportedLanguages
+            let response: HTTPURLResponse = FakeResponseData.responseOK
+            let error: Error? = nil
+            return (response, data, error)
+        }
+        let translatorManager = createSession()
+
+        // When
+        let expectation = XCTestExpectation(description: "Wait for queue change.")
+        translatorManager.getSupportedLanguages { success in
+            XCTAssertTrue(success)
+            expectation.fulfill()
+        }
+
+        wait(for: [expectation], timeout: 0.1)
+    }
+    
+    func testGetLanguagesShouldPostFailedCallbackIfNoData() {
+        // Given
+        TestURLProtocol.loadingHandler = { request in
+            let data: Data? = nil
+            let response: HTTPURLResponse = FakeResponseData.responseOK
+            let error: Error? = nil
+            return (response, data, error)
+        }
+        let translatorManager = createSession()
+
+        // When
+        let expectation = XCTestExpectation(description: "Wait for queue change.")
+        translatorManager.getSupportedLanguages { success in
+            XCTAssertFalse(success)
+            expectation.fulfill()
+        }
+
+        wait(for: [expectation], timeout: 0.1)
+    }
+    
+    func testTranslateShouldPostSuccessCallbackIfNoErrorAndCorrectData() {
+        // Given
+        TestURLProtocol.loadingHandler = { request in
+            let data: Data? = FakeResponseData.translateData
+            let response: HTTPURLResponse = FakeResponseData.responseOK
+            let error: Error? = nil
+            return (response, data, error)
+        }
+        
+        translator = createSession()
+        translator.textToTranslate = "Bonjour"
+        translator.targetLanguageCode = "en"
+
+        // When
+        let expectation = XCTestExpectation(description: "Wait for queue change.")
+        translator.translate { translation in
+            XCTAssertNotNil(translation)
+            expectation.fulfill()
+        }
+
+        wait(for: [expectation], timeout: 0.1)
+    }
+    
+    func testTranslateShouldPostFailedCallbackIfIncorrectData() {
+        // Given
+        TestURLProtocol.loadingHandler = { request in
+            let data: Data? = FakeResponseData.incorrectData
+            let response: HTTPURLResponse = FakeResponseData.responseOK
+            let error: Error? = nil
+            return (response, data, error)
+        }
+        
+        translator = createSession()
+        translator.textToTranslate = "Bonjour"
+        translator.targetLanguageCode = "en"
+
+        // When
+        let expectation = XCTestExpectation(description: "Wait for queue change.")
+        translator.translate { translation in
+            XCTAssertNil(translation)
+            expectation.fulfill()
+        }
+
+        wait(for: [expectation], timeout: 0.1)
+    }
+    
+    func testDetectLanguageShouldPostSuccessCallbackIfNoErrorAndCorrectData() {
+        // Given
+        TestURLProtocol.loadingHandler = { request in
+            let data: Data? = FakeResponseData.detectedLanguage
+            let response: HTTPURLResponse = FakeResponseData.responseOK
+            let error: Error? = nil
+            return (response, data, error)
+        }
+        
+        translator = createSession()
+
+        // When
+        let expectation = XCTestExpectation(description: "Wait for queue change.")
+        translator.detectLanguage(forText: "Bonjour") { language in
+            XCTAssertNotNil(language)
+            expectation.fulfill()
+        }
+
+        wait(for: [expectation], timeout: 0.1)
+    }
+    
     
     func createSession() -> TranslatorManager {
         let configuration = URLSessionConfiguration.ephemeral
