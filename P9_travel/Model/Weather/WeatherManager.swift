@@ -23,7 +23,7 @@ class WeatherManager {
     }
         
     func fetchWeather(cityName: String?, callBack: @escaping (Bool, WeatherModel?) -> Void) {
-        let request = URLRequest(url: URL(string: "\(openWeatherApiURL)&appid=\(apiKey)&q=\(cityName!)") ?? URL(string: "\(openWeatherApiURL)&q=\("")")!)
+        let request = URLRequest(url: URL(string: "\(openWeatherApiURL)&appid=\(apiKey)&q=\(format(cityName: cityName))") ?? URL(string: "\(openWeatherApiURL)&q=\("")")!)
         
         task?.cancel()
         
@@ -52,5 +52,14 @@ class WeatherManager {
         }
         
         task?.resume()
+    }
+    
+    private func format(cityName: String?) -> String {
+        guard let name = cityName else { return "" }
+        let arrayOfString = name.condenseWhitespace().components(separatedBy: " ")
+        var backToString = arrayOfString.joined(separator: "+")
+        backToString = backToString.trimmingCharacters(in: .whitespacesAndNewlines)
+        
+        return backToString
     }
 }

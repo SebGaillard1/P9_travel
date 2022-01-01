@@ -23,9 +23,7 @@ class ConverterViewController: UIViewController {
         
         currencyPickerView.delegate = self
         currencyPickerView.dataSource = self
-        
-        amountTextField.delegate = self // Unused
-        
+                
         typeHereLabel.text = "Amount to convert:"
         
         amountTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
@@ -91,11 +89,5 @@ extension ConverterViewController: UIPickerViewDataSource, UIPickerViewDelegate 
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         currentRow = row
         updateResultTextField()
-    }
-}
-
-extension ConverterViewController: UITextFieldDelegate {
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
     }
 }
