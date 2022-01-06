@@ -22,13 +22,23 @@ class TranslationViewController: UIViewController, LanguageViewControllerDelegat
     //MARK: - viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
-                
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(presentAlert(notification:)), name: Notification.Name("alert"), object: nil)
+        
         let tap = UITapGestureRecognizer(target: view, action: #selector(UIView.endEditing))
         view.addGestureRecognizer(tap)
         
         checkForLanguages()
     }
     
+    //MARK: - AlertController from notification
+    @objc private func presentAlert(notification: Notification) {
+        guard let alertMessage = notification.userInfo!["message"] as? String else { return }
+        let alert = UIAlertController(title: "Error", message: alertMessage, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        
+        present(alert, animated: true)
+    }
     //MARK: - IBActions
     @IBAction func sourceLanguageButton(_ sender: UIButton) {
         buttonTag = sender.tag
@@ -46,16 +56,9 @@ class TranslationViewController: UIViewController, LanguageViewControllerDelegat
     }
     
     @IBAction func detectLanguageButtonPressed(_ sender: UIButton) {
-        if userInputTextView.text != "" {
-            // Faire une waiting animation !!!!
-            TranslatorManager.shared.detectLanguage(forText: userInputTextView.text) { language in
-                if let language = language {
-                    self.sourceLanguageButton.setTitle(language, for: .normal)
-                } else {
-                    let ac = UIAlertController(title: "Detect language", message: "Failed to detect language!", preferredStyle: .alert)
-                    ac.addAction(UIAlertAction(title: "OK", style: .default))
-                    self.present(ac, animated: true)
-                }
+        TranslatorManager.shared.detectLanguage(forText: userInputTextView.text) { language in
+            if let language = language {
+                self.sourceLanguageButton.setTitle(language, for: .normal)
             }
         }
     }

@@ -29,8 +29,13 @@ class TranslatorManager {
         self.session = session
     }
     
+    //MARK: - Alert Notification
+    private func alertNotification(message: String) {
+        let alertName = Notification.Name("alert")
+        NotificationCenter.default.post(name: alertName, object: nil, userInfo: ["message": message])
+    }
+
     //MARK: - Perform request to the correct URL using specified URL Parameters
-    // We create the request with the url + params and then, perform the request
     func makeRequest(usingTranslationAPI api: TranslationAPI, urlParams: [String: String], callBack: @escaping (Bool, [String: Any]?) -> Void) {
         guard var components = URLComponents(string: api.getURL()) else { callBack(false, nil); return }
         components.queryItems = [URLQueryItem]()
@@ -50,11 +55,23 @@ class TranslatorManager {
         task = session.dataTask(with: request) { data, response, error in
             
             DispatchQueue.main.async {
-                guard let data = data, error == nil else { callBack(false, nil); return }
+                guard let data = data, error == nil else {
+                    self.alertNotification(message: "No data from server")
+                    callBack(false, nil)
+                    return
+                }
                 
-                guard let response = response as? HTTPURLResponse, response.statusCode == 200 else { callBack(false, nil); return }
+                guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
+                    self.alertNotification(message: "Bad response from server")
+                    callBack(false, nil)
+                    return
+                }
                 
-                guard let resultDict = try? JSONSerialization.jsonObject(with: data, options: .mutableLeaves) as? [String: Any] else { callBack(false, nil); return }
+                guard let resultDict = try? JSONSerialization.jsonObject(with: data, options: .mutableLeaves) as? [String: Any] else {
+                    self.alertNotification(message: "Bad data from server")
+                    callBack(false, nil)
+                    return
+                }
                 
                 callBack(true, resultDict)
             }
@@ -70,7 +87,11 @@ class TranslatorManager {
         urlParams["target"] = Locale.current.languageCode ?? "en"
         
         makeRequest(usingTranslationAPI: .supportedLanguages, urlParams: urlParams) { _, data in
-            guard let data = data else { callBack(false); return }
+            guard let data = data else {
+                self.alertNotification(message: "Unable to fetch supported languages")
+                callBack(false)
+                return
+            }
             
             let parseSuccess = self.parseJSONForSupportedLanguages(with: data)
             callBack(parseSuccess)
@@ -79,6 +100,11 @@ class TranslatorManager {
     
     func translate(callBack: @escaping (String?) -> Void) {
         guard let textToTranslate = textToTranslate, let targetLanguage = targetLanguageCode else { callBack(nil); return }
+
+        if textToTranslate.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+            alertNotification(message: "No text to translate")
+            return
+        }
         
         var urlParam = [String: String]()
         urlParam["key"] = apiKey
@@ -91,7 +117,12 @@ class TranslatorManager {
         }
         
         makeRequest(usingTranslationAPI: .translate, urlParams: urlParam) { success, data in
-            guard let data = data else { callBack(nil); return }
+            guard let data = data else {
+                self.alertNotification(message: "Unable to translate text")
+                callBack(nil)
+                return
+            }
+            
             callBack(self.parseJSONTranslate(with: data))
         }
     }
@@ -100,7 +131,10 @@ class TranslatorManager {
         let urlParams = ["key": apiKey, "q": text]
         
         makeRequest(usingTranslationAPI: .detectLanguage, urlParams: urlParams) { success, data in
-            guard let data = data else { callBack(nil); return }
+            guard let data = data else {
+                self.alertNotification(message: "Unable to detect language")
+                callBack(nil); return
+            }
             
             if let data = data["data"] as? [String: Any], let detections = data["detections"] as? [[[String: Any]]] {
                 var detectedLanguages = [String]()
@@ -119,6 +153,7 @@ class TranslatorManager {
                     let languageName = self.getLanguageName(fromCode: self.sourceLanguageCode)
                     callBack(languageName)
                 } else {
+                    self.alertNotification(message: "No language detected")
                     callBack(nil)
                 }
             }
