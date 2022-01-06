@@ -27,7 +27,6 @@ struct SupportedLanguagesData: Codable {
 
 struct Data: Codable {
     let languages: [Languages]
-    //let detections: [[Detections]]
 }
 
 struct Languages: Codable {

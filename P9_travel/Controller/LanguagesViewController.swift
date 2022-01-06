@@ -52,21 +52,21 @@ extension LanguagesViewController: UITableViewDataSource, UITableViewDelegate {
         
         let language = TranslatorManager.shared.supportedLanguages[indexPath.row]
         
-        cell.languageLabel.text = language.name ?? ""
-        cell.codeLabel.text = language.code ?? ""
+        cell.languageLabel.text = language.name
+        cell.codeLabel.text = language.language
         
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if isTargetLanguage {
-            TranslatorManager.shared.targetLanguageCode = TranslatorManager.shared.supportedLanguages[indexPath.row].code
+            TranslatorManager.shared.targetLanguageCode = TranslatorManager.shared.supportedLanguages[indexPath.row].language
             delegate.enableTransButton()
         } else {
-            TranslatorManager.shared.sourceLanguageCode = TranslatorManager.shared.supportedLanguages[indexPath.row].code
+            TranslatorManager.shared.sourceLanguageCode = TranslatorManager.shared.supportedLanguages[indexPath.row].language
         }
         
-        delegate.sendLanguage(language: TranslatorManager.shared.supportedLanguages[indexPath.row].name!)
+        delegate.sendLanguage(language: TranslatorManager.shared.supportedLanguages[indexPath.row].name)
         self.dismiss(animated: true)
     }
 }
