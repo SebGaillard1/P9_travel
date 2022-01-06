@@ -34,7 +34,7 @@ class TranslatorManager {
         let alertName = Notification.Name("alert")
         NotificationCenter.default.post(name: alertName, object: nil, userInfo: ["message": message])
     }
-
+    
     //MARK: - Perform request to the correct URL using specified URL Parameters
     func makeRequest(usingTranslationAPI api: TranslationAPI, urlParams: [String: String], callBack: @escaping (Bool, [String: Any]?) -> Void) {
         guard var components = URLComponents(string: api.getURL()) else { callBack(false, nil); return }
@@ -219,3 +219,10 @@ struct TranslationLanguage {
     var code: String?
     var name: String?
 }
+
+
+//guard let responseJSON = try? JSONDecoder().decode(DetectedLanguageData.self, from: data) else { callBack(false, nil); return }
+//let test = responseJSON.data.detections[0][0].language
+
+//guard let responseJSON = try? JSONDecoder().decode(TranslationData.self, from: data) else { callBack(false, nil); return }
+//let test = responseJSON.data.translations[0].translatedText
