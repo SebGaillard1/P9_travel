@@ -22,10 +22,10 @@ struct TranslationDetails: Codable {
 
 //MARK: - Supported languages data struct
 struct SupportedLanguagesData: Codable {
-    let data: Data
+    let data: Donnees
 }
 
-struct Data: Codable {
+struct Donnees: Codable {
     let languages: [Languages]
 }
 
