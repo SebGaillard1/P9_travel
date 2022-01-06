@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		5727A5D02787246C002B4B66 /* TranslationAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5727A5CF2787246C002B4B66 /* TranslationAPI.swift */; };
 		5727A5D227873E27002B4B66 /* TranslationData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5727A5D127873E27002B4B66 /* TranslationData.swift */; };
+		5727A5D82787A856002B4B66 /* FailedDetectedLanguage.json in Resources */ = {isa = PBXBuildFile; fileRef = 5727A5D72787A856002B4B66 /* FailedDetectedLanguage.json */; };
 		576CC1AC276516A4000DD587 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 576CC1AB276516A4000DD587 /* AppDelegate.swift */; };
 		576CC1AE276516A4000DD587 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 576CC1AD276516A4000DD587 /* SceneDelegate.swift */; };
 		576CC1B3276516A4000DD587 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 576CC1B1276516A4000DD587 /* Main.storyboard */; };
@@ -51,6 +52,7 @@
 /* Begin PBXFileReference section */
 		5727A5CF2787246C002B4B66 /* TranslationAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslationAPI.swift; sourceTree = "<group>"; };
 		5727A5D127873E27002B4B66 /* TranslationData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslationData.swift; sourceTree = "<group>"; };
+		5727A5D72787A856002B4B66 /* FailedDetectedLanguage.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = FailedDetectedLanguage.json; sourceTree = "<group>"; };
 		576CC1A8276516A4000DD587 /* P9_travel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = P9_travel.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		576CC1AB276516A4000DD587 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		576CC1AD276516A4000DD587 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -154,6 +156,7 @@
 				57ADAB4B27809DFD003E0545 /* SupportedLanguages.json */,
 				57ADAB5427811145003E0545 /* Translation.json */,
 				57ADAB5827811491003E0545 /* DetectedLanguage.json */,
+				5727A5D72787A856002B4B66 /* FailedDetectedLanguage.json */,
 			);
 			path = JSON;
 			sourceTree = "<group>";
@@ -313,6 +316,7 @@
 			files = (
 				57ADAB4627809051003E0545 /* Weather.json in Resources */,
 				57ADAB4C27809DFD003E0545 /* SupportedLanguages.json in Resources */,
+				5727A5D82787A856002B4B66 /* FailedDetectedLanguage.json in Resources */,
 				57ADAB5927811491003E0545 /* DetectedLanguage.json in Resources */,
 				57ADAB4427809032003E0545 /* Rates.json in Resources */,
 				57ADAB5527811145003E0545 /* Translation.json in Resources */,

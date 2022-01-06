@@ -31,9 +31,10 @@ class WeatherManager {
     
     //MARK: - Fetching weather and create WeatherModel object
     func getWeather(for city: String?, callBack: @escaping (Bool, WeatherModel?) -> Void) {
-        task?.cancel()
+        let request = createWeatherRequest(for: city)
         
-        task = session.dataTask(with: createWeatherRequest(for: city)) { data, response, error in
+        task?.cancel()
+        task = session.dataTask(with: request) { data, response, error in
             DispatchQueue.main.async {
                 guard let data = data, error == nil else { callBack(false, nil); return }
                 

@@ -95,6 +95,7 @@ class TranslatorManager {
 
         if textToTranslate.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
             alertNotification(message: "No text to translate")
+            callBack(nil)
             return
         }
         
