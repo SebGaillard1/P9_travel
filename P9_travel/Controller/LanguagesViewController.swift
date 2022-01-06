@@ -13,7 +13,7 @@ class LanguagesViewController: UIViewController {
     @IBOutlet weak var titleLabel: UILabel!
     
     //MARK: - Private property
-    private let cellId = "TableViewCell"
+    private let cellId = "LanguagesTableViewCell"
     
     //MARK: - Public properties
     var isTargetLanguage = false
@@ -48,7 +48,7 @@ extension LanguagesViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "TableViewCell", for: indexPath) as? LanguageCell else { return UITableViewCell() }
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as? LanguageCell else { return UITableViewCell() }
         
         let language = TranslatorManager.shared.supportedLanguages[indexPath.row]
         

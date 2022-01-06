@@ -34,7 +34,7 @@
 		57CE11742779CE8900431236 /* TranslatorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57CE11732779CE8900431236 /* TranslatorManager.swift */; };
 		57CE11762779F05300431236 /* LanguagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57CE11752779F05300431236 /* LanguagesViewController.swift */; };
 		57CE11792779F93000431236 /* LanguageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57CE11772779F93000431236 /* LanguageCell.swift */; };
-		57CE117A2779F93000431236 /* TableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 57CE11782779F93000431236 /* TableViewCell.xib */; };
+		57CE117A2779F93000431236 /* LanguagesTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 57CE11782779F93000431236 /* LanguagesTableViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -78,7 +78,7 @@
 		57CE11732779CE8900431236 /* TranslatorManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslatorManager.swift; sourceTree = "<group>"; };
 		57CE11752779F05300431236 /* LanguagesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguagesViewController.swift; sourceTree = "<group>"; };
 		57CE11772779F93000431236 /* LanguageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageCell.swift; sourceTree = "<group>"; };
-		57CE11782779F93000431236 /* TableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TableViewCell.xib; sourceTree = "<group>"; };
+		57CE11782779F93000431236 /* LanguagesTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LanguagesTableViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -163,7 +163,7 @@
 				576CC1B4276516A5000DD587 /* Assets.xcassets */,
 				576CC1B6276516A5000DD587 /* LaunchScreen.storyboard */,
 				57CE11772779F93000431236 /* LanguageCell.swift */,
-				57CE11782779F93000431236 /* TableViewCell.xib */,
+				57CE11782779F93000431236 /* LanguagesTableViewCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -298,7 +298,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				576CC1B8276516A5000DD587 /* LaunchScreen.storyboard in Resources */,
-				57CE117A2779F93000431236 /* TableViewCell.xib in Resources */,
+				57CE117A2779F93000431236 /* LanguagesTableViewCell.xib in Resources */,
 				576CC1B5276516A5000DD587 /* Assets.xcassets in Resources */,
 				576CC1B3276516A4000DD587 /* Main.storyboard in Resources */,
 			);
