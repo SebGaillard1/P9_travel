@@ -39,6 +39,7 @@ class TranslationViewController: UIViewController, LanguageViewControllerDelegat
         
         present(alert, animated: true)
     }
+    
     //MARK: - IBActions
     @IBAction func sourceLanguageButton(_ sender: UIButton) {
         buttonTag = sender.tag
@@ -82,13 +83,7 @@ class TranslationViewController: UIViewController, LanguageViewControllerDelegat
     private func startTranslation() {
         TranslatorManager.shared.translate { translation in
             if translation != nil {
-                // Success, we show the translation
-                DispatchQueue.main.async {
                     self.outputTextView.text = translation
-                }
-            } else {
-                // Failed, something went wrong
-                
             }
         }
     }
@@ -99,14 +94,7 @@ class TranslationViewController: UIViewController, LanguageViewControllerDelegat
             if success {
                 self.sourceLanguageButton.isEnabled = true
                 self.targetLanguageButton.isEnabled = true
-            } else {
-                // Inform : Failed to fetch languages
-                let ac = UIAlertController(title: "Supported languages", message: "Something went wrong! Impossible to fetch supported languages", preferredStyle: .alert)
-                ac.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
-                    self.dismiss(animated: true)
-                }))
-                self.present(ac, animated: true)
-            }
+            } 
         }
     }
     

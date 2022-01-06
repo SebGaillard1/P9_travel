@@ -63,18 +63,22 @@ class TranslatorManager {
         task = session.dataTask(with: request, completionHandler: { data, response, error in
             DispatchQueue.main.async {
                 guard let data = data, error == nil else {
-                    self.alertNotification(message: "No data from server")
+                    self.alertNotification(message: "Cannot fetch supported languages")
                     callBack(false)
                     return
                 }
                 
                 guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
-                    self.alertNotification(message: "Bad response from server")
+                    self.alertNotification(message: "Bad response from server, cannot fetch supported languages")
                     callBack(false)
                     return
                 }
                 
-                guard let responseJSON = try? JSONDecoder().decode(SupportedLanguagesData.self, from: data) else { callBack(false); return }
+                guard let responseJSON = try? JSONDecoder().decode(SupportedLanguagesData.self, from: data) else {
+                    self.alertNotification(message: "Failed to fetch supported languages")
+                    callBack(false)
+                    return
+                }
                 
                 for language in responseJSON.data.languages {
                     self.supportedLanguages.append(language)
@@ -110,18 +114,22 @@ class TranslatorManager {
         task = session.dataTask(with: request, completionHandler: { data, response, error in
             DispatchQueue.main.async {
                 guard let data = data, error == nil else {
-                    self.alertNotification(message: "No data from server")
+                    self.alertNotification(message: "Cannot translate")
                     callBack(nil)
                     return
                 }
                 
                 guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
-                    self.alertNotification(message: "Bad response from server")
+                    self.alertNotification(message: "Bad response from server, failed to translate")
                     callBack(nil)
                     return
                 }
                 
-                guard let responseJSON = try? JSONDecoder().decode(TranslationData.self, from: data) else { callBack(nil); return }
+                guard let responseJSON = try? JSONDecoder().decode(TranslationData.self, from: data) else {
+                    self.alertNotification(message: "Failed to translate")
+                    callBack(nil)
+                    return
+                }
                 let translation = responseJSON.data.translations[0].translatedText
                 
                 callBack(translation)
@@ -141,18 +149,22 @@ class TranslatorManager {
         task = session.dataTask(with: request, completionHandler: { data, response, error in
             DispatchQueue.main.async {
                 guard let data = data, error == nil else {
-                    self.alertNotification(message: "No data from server")
+                    self.alertNotification(message: "Cannot detect language")
                     callBack(nil)
                     return
                 }
                 
                 guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
-                    self.alertNotification(message: "Bad response from server")
+                    self.alertNotification(message: "Bad response from server, cannot detect language")
                     callBack(nil)
                     return
                 }
                 
-                guard let responseJSON = try? JSONDecoder().decode(DetectedLanguageData.self, from: data) else { callBack(nil); return }
+                guard let responseJSON = try? JSONDecoder().decode(DetectedLanguageData.self, from: data) else {
+                    self.alertNotification(message: "Failed to detect language")
+                    callBack(nil)
+                    return
+                }
                 let languageCodeDetected = responseJSON.data.detections[0][0].language
                 
                 if languageCodeDetected == "und" {
