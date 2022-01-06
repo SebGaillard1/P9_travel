@@ -8,13 +8,16 @@
 import UIKit
 
 class ConverterViewController: UIViewController {
+    //MARK: - IBOutlets
     @IBOutlet weak var resultLabel: UILabel!
     @IBOutlet weak var typeHereLabel: UILabel!
     @IBOutlet weak var amountTextField: UITextField!
     @IBOutlet weak var currencyPickerView: UIPickerView!
     
+    //MARK: - Private property
     private var currentRow = 0
         
+    //MARK: - viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -31,6 +34,8 @@ class ConverterViewController: UIViewController {
         refreshRates()
     }
     
+    //MARK: - Private methods
+    // Display the fetched rates in pickerView and enable user input
     private func refreshRates() {
         ConverterManager.shared.getRates { success, _ in
             if !success {
@@ -46,17 +51,14 @@ class ConverterViewController: UIViewController {
         }
     }
     
-    @objc private func textFieldDidChange(_ textField: UITextField) {
-        checkForForbiddenCharacters()
-        updateResultTextField()
-    }
-    
+    // Update result only if there is a currency to convert to
     private func updateResultTextField() {
         if !ConverterManager.shared.currencies.isEmpty {
             resultLabel.text = "\(ConverterManager.shared.convert(amount: amountTextField.text, from: ConverterManager.shared.currencies[currentRow])) USD"
         }
     }
     
+    // Allow only number and only one decimal point into amount textField
     private func checkForForbiddenCharacters() {
         amountTextField.text = amountTextField.text?.onlyNumbers
         amountTextField.text = amountTextField.text?.replacingOccurrences(of: ",", with: ".")
@@ -71,8 +73,16 @@ class ConverterViewController: UIViewController {
             }
         }
     }
+    
+    //MARK: - Objective c selector
+    // Check for invalid character at every key pressed and update result
+    @objc private func textFieldDidChange(_ textField: UITextField) {
+        checkForForbiddenCharacters()
+        updateResultTextField()
+    }
 }
 
+//MARK: - Picker View
 extension ConverterViewController: UIPickerViewDataSource, UIPickerViewDelegate {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1

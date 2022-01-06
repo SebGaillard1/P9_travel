@@ -8,28 +8,33 @@
 import Foundation
 
 class ConverterManager {
+    //MARK: - Singleton Pattern
     static var shared = ConverterManager()
     private init() {}
     
+    //MARK: - Private properties
     private static let apiKey = "cb9d3af8ca4fc45716d10314a50abb19"
     private static let url = "http://data.fixer.io/api/latest"
     
-    private var task: URLSessionDataTask?
+    private var lastFetchingRatesDate: Date?
     
+    private var task: URLSessionDataTask?
     private var session = URLSession(configuration: .default)
     
+    //MARK: - Initializer
     init(session: URLSession) {
         self.session = session
     }
-    
-    private var lastFetchingRatesDate: Date?
-    
+      
+    //MARK: - Computed properties
+    // Array of all currencies sorted alphabetically
     var currencies = [String]() {
         didSet {
             currencies = currencies.sorted(by: { $0 < $1 })
         }
     }
     
+    // Dictionary of currencies with their associated rate
     var currenciesWithRates = [String: Any]() {
         didSet {
             currencies.removeAll()
@@ -39,8 +44,14 @@ class ConverterManager {
         }
     }
     
+    //MARK: - Create URLRequest
+    private static func createRatesRequest() -> URLRequest {
+        return URLRequest(url: URL(string: "\(url)?access_key=\(apiKey)")!)
+    }
+    
+    //MARK: - Fetching rates
     func getRates(callBack: @escaping (Bool, [String: Any]?) -> Void) {
-        if alreadyFetchRatesToday() { callBack(true, currenciesWithRates); return } // Si on a déja les données, on renvoies les données locales
+        if areRatesAlreadyFetchedToday() { callBack(true, currenciesWithRates); return } // Si on a déja les données, on renvoies les données locales
         
         let request = ConverterManager.createRatesRequest()
         
@@ -57,6 +68,7 @@ class ConverterManager {
                 
                 self.currenciesWithRates = rates
                 
+                // Setting the last fetching date as Today
                 self.lastFetchingRatesDate = Date()
                 
                 callBack(true, rates)
@@ -66,7 +78,8 @@ class ConverterManager {
         task?.resume()
     }
     
-    private func alreadyFetchRatesToday() -> Bool {
+    //MARK: - Check if rates were already fetched today
+    private func areRatesAlreadyFetchedToday() -> Bool {
         guard let date = lastFetchingRatesDate else { return false }
         
         if Calendar.current.isDateInToday(date) {
@@ -76,10 +89,7 @@ class ConverterManager {
         }
     }
     
-    private static func createRatesRequest() -> URLRequest {
-        return URLRequest(url: URL(string: "\(url)?access_key=\(apiKey)")!)
-    }
-    
+    //MARK: - Convert user currency to USD
     func convert(amount: String?, from currency: String?) -> String {
         guard let amountString = amount else { return "-" }
         guard let amountDouble = Double(amountString) else { return "-" }

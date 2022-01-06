@@ -14,8 +14,12 @@ extension String {
     }
     
     var onlyNumbers: String {
-        let charset = CharacterSet.punctuationCharacters.union(CharacterSet.decimalDigits).inverted
-
+        var charset = CharacterSet.decimalDigits
+        charset.insert(",")
+        charset.insert(".")
+        
+        charset = charset.inverted
+        
         return components(separatedBy: charset).joined()
     }
 }

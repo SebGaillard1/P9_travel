@@ -8,26 +8,32 @@
 import Foundation
 
 class WeatherManager {
+    //MARK: - Singleton Pattern
     static var shared = WeatherManager()
     private init() {}
     
+    //MARK: - Properties
     private let openWeatherApiURL = "https://api.openweathermap.org/data/2.5/weather?&units=metric"
     private let apiKey = "4b82d7831968c1f714ed9fad3f72b620"
     
     private var task: URLSessionDataTask?
-    
     private var session = URLSession(configuration: .default)
     
+    //MARK: - Initializer
     init(session: URLSession) {
         self.session = session
     }
         
+    //MARK: - Create URLRequest
+    private func createWeatherRequest(for city: String?) -> URLRequest {
+        return URLRequest(url: URL(string: "\(openWeatherApiURL)&appid=\(apiKey)&q=\(format(cityName: city))") ?? URL(string: "\(openWeatherApiURL)&q=\("")")!)
+    }
+    
+    //MARK: - Fetching weather and create WeatherModel object
     func getWeather(for city: String?, callBack: @escaping (Bool, WeatherModel?) -> Void) {
-        let request = URLRequest(url: URL(string: "\(openWeatherApiURL)&appid=\(apiKey)&q=\(format(cityName: city))") ?? URL(string: "\(openWeatherApiURL)&q=\("")")!)
-        
         task?.cancel()
         
-        task = session.dataTask(with: request) { data, response, error in
+        task = session.dataTask(with: createWeatherRequest(for: city)) { data, response, error in
             DispatchQueue.main.async {
                 guard let data = data, error == nil else { callBack(false, nil); return }
                 
@@ -54,6 +60,7 @@ class WeatherManager {
         task?.resume()
     }
     
+    //MARK: - Format city name with whitespace
     private func format(cityName: String?) -> String {
         guard let name = cityName else { return "" }
         let arrayOfString = name.condenseWhitespace().components(separatedBy: " ")

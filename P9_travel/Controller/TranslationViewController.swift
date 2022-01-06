@@ -8,6 +8,7 @@
 import UIKit
 
 class TranslationViewController: UIViewController, LanguageViewControllerDelegate {
+    //MARK: - IBOutlets
     @IBOutlet weak var userInputTextView: UITextView!
     @IBOutlet weak var outputTextView: UITextView!
     @IBOutlet weak var tradButton: UIButton!
@@ -15,8 +16,10 @@ class TranslationViewController: UIViewController, LanguageViewControllerDelegat
     @IBOutlet weak var targetLanguageButton: UIButton!
     @IBOutlet weak var detectLanguageButton: UIButton!
     
+    //MARK: - Private property
     private var buttonTag = 0
     
+    //MARK: - viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
                 
@@ -26,6 +29,7 @@ class TranslationViewController: UIViewController, LanguageViewControllerDelegat
         checkForLanguages()
     }
     
+    //MARK: - IBActions
     @IBAction func sourceLanguageButton(_ sender: UIButton) {
         buttonTag = sender.tag
         performSegue(withIdentifier: "segueToSelectLanguage", sender: self)
@@ -56,6 +60,7 @@ class TranslationViewController: UIViewController, LanguageViewControllerDelegat
         }
     }
     
+    //MARK: - Segue preparation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "segueToSelectLanguage" {
             let destinationVC = segue.destination as! LanguagesViewController
@@ -69,6 +74,8 @@ class TranslationViewController: UIViewController, LanguageViewControllerDelegat
         }
     }
     
+    //MARK: - Private methods
+    // Display the result of the translation
     private func startTranslation() {
         TranslatorManager.shared.translate { translation in
             if translation != nil {
@@ -78,29 +85,12 @@ class TranslationViewController: UIViewController, LanguageViewControllerDelegat
                 }
             } else {
                 // Failed, something went wrong
-                print("wroooooong")
+                
             }
         }
     }
     
-    func sendLanguage(language: String) {
-        if sourceLanguageButton.tag == buttonTag {
-            sourceLanguageButton.setTitle(language, for: .normal)
-        } else {
-            targetLanguageButton.setTitle(language, for: .normal)
-        }
-    }
-    
-    func enableTransButton() {
-        tradButton.isEnabled = true
-    }
-    
-    private func checkForLanguages() {
-        if TranslatorManager.shared.supportedLanguages.isEmpty {
-            fetchSupportedLanguages()
-        }
-    }
-    
+    // Enable selection of source or target language
     private func fetchSupportedLanguages() {
         TranslatorManager.shared.getSupportedLanguages { success in
             if success {
@@ -114,6 +104,26 @@ class TranslationViewController: UIViewController, LanguageViewControllerDelegat
                 }))
                 self.present(ac, animated: true)
             }
+        }
+    }
+    
+    // Set button title to the language selected in the LanguagesViewController
+    internal func sendLanguage(language: String) {
+        if sourceLanguageButton.tag == buttonTag {
+            sourceLanguageButton.setTitle(language, for: .normal)
+        } else {
+            targetLanguageButton.setTitle(language, for: .normal)
+        }
+    }
+    
+    // Enable translation button when a target language is selected in LanguagesViewController
+    internal func enableTransButton() {
+        tradButton.isEnabled = true
+    }
+    
+    private func checkForLanguages() {
+        if TranslatorManager.shared.supportedLanguages.isEmpty {
+            fetchSupportedLanguages()
         }
     }
 }

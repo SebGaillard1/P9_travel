@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5727A5D02787246C002B4B66 /* TranslationAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5727A5CF2787246C002B4B66 /* TranslationAPI.swift */; };
 		576CC1AC276516A4000DD587 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 576CC1AB276516A4000DD587 /* AppDelegate.swift */; };
 		576CC1AE276516A4000DD587 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 576CC1AD276516A4000DD587 /* SceneDelegate.swift */; };
 		576CC1B3276516A4000DD587 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 576CC1B1276516A4000DD587 /* Main.storyboard */; };
@@ -47,6 +48,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5727A5CF2787246C002B4B66 /* TranslationAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslationAPI.swift; sourceTree = "<group>"; };
 		576CC1A8276516A4000DD587 /* P9_travel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = P9_travel.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		576CC1AB276516A4000DD587 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		576CC1AD276516A4000DD587 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -209,6 +211,7 @@
 			isa = PBXGroup;
 			children = (
 				57CE11732779CE8900431236 /* TranslatorManager.swift */,
+				5727A5CF2787246C002B4B66 /* TranslationAPI.swift */,
 			);
 			path = Traduction;
 			sourceTree = "<group>";
@@ -324,6 +327,7 @@
 				57CE11742779CE8900431236 /* TranslatorManager.swift in Sources */,
 				57CE113D2778A55300431236 /* WeatherViewController.swift in Sources */,
 				57CE113B2778A54900431236 /* TranslationViewController.swift in Sources */,
+				5727A5D02787246C002B4B66 /* TranslationAPI.swift in Sources */,
 				57CE11792779F93000431236 /* LanguageCell.swift in Sources */,
 				57CE116F2778FC6D00431236 /* WeatherData.swift in Sources */,
 				57CE11392778A53100431236 /* ConverterViewController.swift in Sources */,

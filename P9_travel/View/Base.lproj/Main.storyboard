@@ -52,7 +52,7 @@
                                             <constraint firstAttribute="height" constant="34" id="c9p-WJ-zhj"/>
                                         </constraints>
                                     </stackView>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Bonjour" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="3xL-lf-SEX">
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="3xL-lf-SEX">
                                         <rect key="frame" x="0.0" y="102" width="394" height="196.5"/>
                                         <color key="backgroundColor" systemColor="systemGray5Color"/>
                                         <color key="textColor" systemColor="labelColor"/>

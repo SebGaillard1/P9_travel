@@ -8,6 +8,7 @@
 import UIKit
 
 class WeatherViewController: UIViewController {
+    //MARK: - Weather IBOutlets
     @IBOutlet weak var cityNameTextField: UITextField!
     @IBOutlet weak var weatherConditionImageView: UIImageView!
     @IBOutlet weak var conditionLabel: UILabel!
@@ -19,6 +20,10 @@ class WeatherViewController: UIViewController {
     @IBOutlet weak var pressureLabel: UILabel!
     @IBOutlet weak var humidityLabel: UILabel!
     
+    @IBOutlet var weatherViewsToHide: [UIStackView]!
+    @IBOutlet weak var searchWeatherLabel: UILabel!
+    
+    //MARK: - NY IBOutlets
     @IBOutlet weak var nyWeatherConditionImageView: UIImageView!
     @IBOutlet weak var nyTempLabel: UILabel!
     @IBOutlet weak var nyNameLabel: UILabel!
@@ -27,11 +32,9 @@ class WeatherViewController: UIViewController {
     @IBOutlet weak var nyTempMinLabel: UILabel!
     @IBOutlet weak var nyTempMaxLabel: UILabel!
         
-    @IBOutlet var weatherViewsToHide: [UIStackView]!
-    @IBOutlet weak var searchWeatherLabel: UILabel!
-    
     @IBOutlet weak var nyWeatherStackView: UIStackView!
     
+    //MARK: - viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -48,10 +51,13 @@ class WeatherViewController: UIViewController {
         getNewYorkWeather()
     }
     
+    //MARK: - IBAction
     @IBAction func searchPressed(_ sender: UIButton) {
         searchCityWeather()
     }
     
+    //MARK: - Private methods
+    // Get weather from search textField
     private func searchCityWeather() {
         getWeather()
         
@@ -59,10 +65,10 @@ class WeatherViewController: UIViewController {
         cityNameTextField.text = nil
     }
     
+    // Get weather and update views with the weather
     private func getWeather() {
         WeatherManager.shared.getWeather(for: cityNameTextField.text) { success, weather in
             if success {
-                // On affiche les données météo
                 self.updateWeatherViews(with: weather!)
             } else {
                 self.presentErrorMessage(with: "Failed to fetch weather")
@@ -70,6 +76,7 @@ class WeatherViewController: UIViewController {
         }
     }
     
+    // Get NY weather and update NY weather views
     private func getNewYorkWeather() {
         WeatherManager.shared.getWeather(for: "New+York") { success, NYWeather in
             if success {
@@ -80,6 +87,7 @@ class WeatherViewController: UIViewController {
         }
     }
     
+    // Update weather views
     private func updateWeatherViews(with weather: WeatherModel) {
         if searchWeatherLabel.isHidden == false {
             firstUIUpdate()
@@ -96,6 +104,7 @@ class WeatherViewController: UIViewController {
         self.humidityLabel.text = "💧 \(weather.humidity) %"
     }
     
+    // Update NY weather views
     private func updateNYWeatherViews(with weather: WeatherModel) {
         nyWeatherStackView.isHidden = false
         
@@ -108,12 +117,14 @@ class WeatherViewController: UIViewController {
         self.nyTempMaxLabel.text = "⬆ \(weather.tempMax)°C"
     }
     
+    // Present and Error Alert Controller
     private func presentErrorMessage(with error: String) {
         let ac = UIAlertController(title: "Error", message: error, preferredStyle: .alert)
         ac.addAction(UIAlertAction(title: "OK", style: .default))
         self.present(ac, animated: true)
     }
     
+    // Perform first UI update
     private func firstUIUpdate() {
         for viewToHide in weatherViewsToHide {
             viewToHide.isHidden = false
@@ -122,6 +133,8 @@ class WeatherViewController: UIViewController {
     }
 }
 
+//MARK: - Extension
+// Hide keyboard when return pressed
 extension WeatherViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         searchCityWeather()
