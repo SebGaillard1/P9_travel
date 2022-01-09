@@ -35,6 +35,8 @@ class TranslatorManager {
         NotificationCenter.default.post(name: alertName, object: nil, userInfo: ["message": message])
     }
     
+    //MARK: - Private methods
+    // Create URLRequest object
     private func createRequest(usingTranslationAPI api: TranslationAPI, urlParams: [String: String]) -> URLRequest? {
         guard var components = URLComponents(string: api.getURL()) else { return nil }
         
@@ -51,7 +53,8 @@ class TranslatorManager {
         return request
     }
     
-    //MARK: - Fetch the supported languages
+    //MARK: - Public methods
+    // Fetch the supported languages
     func getSupportedLanguages(callBack: @escaping (_ success: Bool) -> Void) {
         var urlParams = [String: String]()
         urlParams["key"] = apiKey
@@ -90,6 +93,7 @@ class TranslatorManager {
         task?.resume()
     }
     
+    // Translate a text to a selected language
     func translate(callBack: @escaping (_ translation: String?) -> Void) {
         guard let textToTranslate = textToTranslate, let targetLanguage = targetLanguageCode else { callBack(nil); return }
 
@@ -140,6 +144,7 @@ class TranslatorManager {
         task?.resume()
     }
     
+    // Detect source language
     func detectLanguage(forText text: String, callBack: @escaping (_ language: String?) -> Void) {
         let urlParams = ["key": apiKey, "q": text]
         
@@ -183,7 +188,7 @@ class TranslatorManager {
         task?.resume()
     }
     
-    //MARK: - Return languageName from languageCode
+    // Return language name from language code
     private func getLanguageName(fromCode code: String?) -> String? {
         if let code = code {
             for language in supportedLanguages {

@@ -34,17 +34,20 @@ class ConverterViewController: UIViewController {
         refreshRates()
     }
     
+    //MARK: - AlertController from notification
+    @objc private func presentAlert(notification: Notification) {
+        guard let alertMessage = notification.userInfo!["message"] as? String else { return }
+        let alert = UIAlertController(title: "Error", message: alertMessage, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        
+        present(alert, animated: true)
+    }
+    
     //MARK: - Private methods
     // Display the fetched rates in pickerView and enable user input
     private func refreshRates() {
         ConverterManager.shared.getRates { success, _ in
-            if !success {
-                self.amountTextField.isUserInteractionEnabled = false
-                
-                let ac = UIAlertController(title: "Error", message: "Failed to fetch rates", preferredStyle: .alert)
-                ac.addAction(UIAlertAction(title: "OK", style: .default))
-                self.present(ac, animated: true)
-            } else {
+            if success {
                 self.currencyPickerView.reloadAllComponents()
                 self.amountTextField.isUserInteractionEnabled = true
             }
@@ -74,7 +77,7 @@ class ConverterViewController: UIViewController {
         }
     }
     
-    //MARK: - Objective c selector
+    //MARK: - Selector
     // Check for invalid character at every key pressed and update result
     @objc private func textFieldDidChange(_ textField: UITextField) {
         checkForForbiddenCharacters()

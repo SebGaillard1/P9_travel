@@ -13,8 +13,8 @@ class ConverterManager {
     private init() {}
     
     //MARK: - Private properties
-    private static let apiKey = "cb9d3af8ca4fc45716d10314a50abb19"
-    private static let url = "http://data.fixer.io/api/latest"
+    private let apiKey = "cb9d3af8ca4fc45716d10314a50abb19"
+    private let url = "http://data.fixer.io/api/latest"
     
     private var lastFetchingRatesDate: Date?
     
@@ -44,27 +44,48 @@ class ConverterManager {
         }
     }
     
+    //MARK: - Alert Notification
+    private func alertNotification(message: String) {
+        let alertName = Notification.Name("alert")
+        NotificationCenter.default.post(name: alertName, object: nil, userInfo: ["message": message])
+    }
+    
     //MARK: - Create URLRequest
-    private static func createRatesRequest() -> URLRequest {
+    private func createRatesRequest() -> URLRequest {
         return URLRequest(url: URL(string: "\(url)?access_key=\(apiKey)")!)
     }
     
     //MARK: - Fetching rates
     func getRates(callBack: @escaping (Bool, [String: Any]?) -> Void) {
-        if areRatesAlreadyFetchedToday() { callBack(true, currenciesWithRates); return } // Si on a déja les données, on renvoies les données locales
+        if areRatesAlreadyFetchedToday() { callBack(true, currenciesWithRates); return }
         
-        let request = ConverterManager.createRatesRequest()
+        let request = createRatesRequest()
         
         task?.cancel()
         task = session.dataTask(with: request) { data, response, error in
             DispatchQueue.main.async {
-                guard let data = data, error == nil else { callBack(false, nil); return }
+                guard let data = data, error == nil else {
+                    self.alertNotification(message: "Failed to fetch rates!")
+                    callBack(false, nil)
+                    return
+                }
                 
-                guard let response = response as? HTTPURLResponse, response.statusCode == 200 else { callBack(false, nil); return }
+                guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
+                    self.alertNotification(message: "Bad server response, cannot fetch rates!")
+                    callBack(false, nil)
+                    return
+                }
                 
-                guard let resultDict = try? JSONSerialization.jsonObject(with: data, options: .mutableLeaves) as? [String: Any] else { callBack(false, nil); return }
+                guard let resultDict = try? JSONSerialization.jsonObject(with: data, options: .mutableLeaves) as? [String: Any] else {
+                    self.alertNotification(message: "Failed to decode data!")
+                    callBack(false, nil)
+                    return
+                }
 
-                guard let rates = resultDict["rates"] as? [String: Any] else { return }
+                guard let rates = resultDict["rates"] as? [String: Any] else {
+                    self.alertNotification(message: "Failed to decode data!")
+                    return
+                }
                 
                 self.currenciesWithRates = rates
                 

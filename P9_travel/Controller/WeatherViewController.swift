@@ -51,6 +51,15 @@ class WeatherViewController: UIViewController {
         getNewYorkWeather()
     }
     
+    //MARK: - AlertController from notification
+    @objc private func presentAlert(notification: Notification) {
+        guard let alertMessage = notification.userInfo!["message"] as? String else { return }
+        let alert = UIAlertController(title: "Error", message: alertMessage, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        
+        present(alert, animated: true)
+    }
+    
     //MARK: - IBAction
     @IBAction func searchPressed(_ sender: UIButton) {
         searchCityWeather()
@@ -70,8 +79,6 @@ class WeatherViewController: UIViewController {
         WeatherManager.shared.getWeather(for: cityNameTextField.text) { success, weather in
             if success {
                 self.updateWeatherViews(with: weather!)
-            } else {
-                self.presentErrorMessage(with: "Failed to fetch weather")
             }
         }
     }
@@ -81,8 +88,6 @@ class WeatherViewController: UIViewController {
         WeatherManager.shared.getWeather(for: "New+York") { success, NYWeather in
             if success {
                 self.updateNYWeatherViews(with: NYWeather!)
-            } else {
-                self.presentErrorMessage(with: "Failed to fetch New York weather")
             }
         }
     }
@@ -115,13 +120,6 @@ class WeatherViewController: UIViewController {
         self.nyDescriptionLabel.text = "ℹ️ \(weather.description)"
         self.nyTempMinLabel.text = "⬇ \(weather.tempMin)°C"
         self.nyTempMaxLabel.text = "⬆ \(weather.tempMax)°C"
-    }
-    
-    // Present and Error Alert Controller
-    private func presentErrorMessage(with error: String) {
-        let ac = UIAlertController(title: "Error", message: error, preferredStyle: .alert)
-        ac.addAction(UIAlertAction(title: "OK", style: .default))
-        self.present(ac, animated: true)
     }
     
     // Perform first UI update
