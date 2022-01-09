@@ -102,13 +102,12 @@ class TranslatorTests: XCTestCase {
         }
         
         translator = createSession()
-        translator.textToTranslate = "Bonjour"
         translator.targetLanguageCode = "en"
         translator.sourceLanguageCode = "fr"
 
         // When
         let expectation = XCTestExpectation(description: "Wait for queue change.")
-        translator.translate { translation in
+        translator.translate(text: "Bonjour") { translation in
             XCTAssertNotNil(translation)
             expectation.fulfill()
         }
@@ -126,12 +125,11 @@ class TranslatorTests: XCTestCase {
         }
         
         translator = createSession()
-        translator.textToTranslate = "Bonjour"
         translator.targetLanguageCode = "en"
 
         // When
         let expectation = XCTestExpectation(description: "Wait for queue change.")
-        translator.translate { translation in
+        translator.translate(text: "Bonjour") { translation in
             XCTAssertNil(translation)
             expectation.fulfill()
         }
@@ -149,12 +147,11 @@ class TranslatorTests: XCTestCase {
         }
         
         translator = createSession()
-        translator.textToTranslate = "Bonjour"
         translator.targetLanguageCode = "en"
 
         // When
         let expectation = XCTestExpectation(description: "Wait for queue change.")
-        translator.translate { translation in
+        translator.translate(text: "Bonjour") { translation in
             XCTAssertNil(translation)
             expectation.fulfill()
         }
@@ -172,12 +169,11 @@ class TranslatorTests: XCTestCase {
         }
         
         translator = createSession()
-        translator.textToTranslate = "Bonjour"
         translator.targetLanguageCode = "en"
 
         // When
         let expectation = XCTestExpectation(description: "Wait for queue change.")
-        translator.translate { translation in
+        translator.translate(text: "Bonjour") { translation in
             XCTAssertNil(translation)
             expectation.fulfill()
         }
@@ -195,12 +191,11 @@ class TranslatorTests: XCTestCase {
         }
         
         translator = createSession()
-        translator.textToTranslate = ""
         translator.targetLanguageCode = "en"
 
         // When
         let expectation = XCTestExpectation(description: "Wait for queue change.")
-        translator.translate { translation in
+        translator.translate(text: "") { translation in
             XCTAssertNil(translation)
             expectation.fulfill()
         }

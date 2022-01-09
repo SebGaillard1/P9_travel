@@ -52,7 +52,6 @@ class TranslationViewController: UIViewController, LanguageViewControllerDelegat
     }
     
     @IBAction func tradButtonPressed(_ sender: Any) {
-        TranslatorService.shared.textToTranslate = userInputTextView.text
         startTranslation()
     }
     
@@ -81,7 +80,7 @@ class TranslationViewController: UIViewController, LanguageViewControllerDelegat
     //MARK: - Private methods
     // Display the result of the translation
     private func startTranslation() {
-        TranslatorService.shared.translate { translation in
+        TranslatorService.shared.translate(text: userInputTextView.text) { translation in
             if translation != nil {
                     self.outputTextView.text = translation
             }

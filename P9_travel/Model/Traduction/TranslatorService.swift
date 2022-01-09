@@ -20,7 +20,6 @@ class TranslatorService {
     
     //MARK: - Public properties
     var supportedLanguages = [Languages]()
-    var textToTranslate: String?
     var targetLanguageCode: String?
     var sourceLanguageCode: String?
    
@@ -94,8 +93,8 @@ class TranslatorService {
     }
     
     // Translate a text to a selected language
-    func translate(callBack: @escaping (_ translation: String?) -> Void) {
-        guard let textToTranslate = textToTranslate, let targetLanguage = targetLanguageCode else { callBack(nil); return }
+    func translate(text: String?, callBack: @escaping (_ translation: String?) -> Void) {
+        guard let textToTranslate = text, let targetLanguage = targetLanguageCode else { callBack(nil); return }
 
         if textToTranslate.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
             alertNotification(message: "No text to translate")
