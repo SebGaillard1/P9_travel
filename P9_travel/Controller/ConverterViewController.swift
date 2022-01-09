@@ -30,6 +30,7 @@ class ConverterViewController: UIViewController {
         typeHereLabel.text = "Amount to convert:"
         
         amountTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
+        NotificationCenter.default.addObserver(self, selector: #selector(presentAlert(notification:)), name: Notification.Name("alert"), object: nil)
         
         refreshRates()
     }

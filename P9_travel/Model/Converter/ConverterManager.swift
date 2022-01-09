@@ -13,7 +13,7 @@ class ConverterManager {
     private init() {}
     
     //MARK: - Private properties
-    private let apiKey = "cb9d3af8ca4fc45716d10314a50abb19"
+    private let apiKey = "a7841991a6a36d9a87dbcef10bb31e27"
     private let url = "http://data.fixer.io/api/latest"
     
     private var lastFetchingRatesDate: Date?

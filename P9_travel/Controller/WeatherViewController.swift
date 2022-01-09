@@ -45,6 +45,8 @@ class WeatherViewController: UIViewController {
         }
         nyWeatherStackView.isHidden = true
         
+        NotificationCenter.default.addObserver(self, selector: #selector(presentAlert(notification:)), name: Notification.Name("alert"), object: nil)
+        
         let tap = UITapGestureRecognizer(target: view, action: #selector(UIView.endEditing))
         view.addGestureRecognizer(tap)
                 

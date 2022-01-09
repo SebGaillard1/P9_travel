@@ -28,7 +28,7 @@ class TranslationViewController: UIViewController, LanguageViewControllerDelegat
         let tap = UITapGestureRecognizer(target: view, action: #selector(UIView.endEditing))
         view.addGestureRecognizer(tap)
         
-        checkForLanguages()
+        fetchSupportedLanguages()
     }
     
     //MARK: - AlertController from notification
@@ -110,11 +110,5 @@ class TranslationViewController: UIViewController, LanguageViewControllerDelegat
     // Enable translation button when a target language is selected in LanguagesViewController
     internal func enableTransButton() {
         tradButton.isEnabled = true
-    }
-    
-    private func checkForLanguages() {
-        if TranslatorManager.shared.supportedLanguages.isEmpty {
-            fetchSupportedLanguages()
-        }
     }
 }
