@@ -7,9 +7,9 @@
 
 import Foundation
 
-class TranslatorManager {
+class TranslatorService {
     //MARK: - Singleton Pattern
-    static let shared = TranslatorManager()
+    static let shared = TranslatorService()
     private init() {}
         
     //MARK: - Private properties

@@ -47,7 +47,7 @@ class ConverterViewController: UIViewController {
     //MARK: - Private methods
     // Display the fetched rates in pickerView and enable user input
     private func refreshRates() {
-        ConverterManager.shared.getRates { success, _ in
+        ConverterService.shared.getRates { success, _ in
             if success {
                 self.currencyPickerView.reloadAllComponents()
                 self.amountTextField.isUserInteractionEnabled = true
@@ -57,8 +57,8 @@ class ConverterViewController: UIViewController {
     
     // Update result only if there is a currency to convert to
     private func updateResultTextField() {
-        if !ConverterManager.shared.currencies.isEmpty {
-            resultLabel.text = "\(ConverterManager.shared.convert(amount: amountTextField.text, from: ConverterManager.shared.currencies[currentRow])) USD"
+        if !ConverterService.shared.currencies.isEmpty {
+            resultLabel.text = "\(ConverterService.shared.convert(amount: amountTextField.text, from: ConverterService.shared.currencies[currentRow])) USD"
         }
     }
     
@@ -93,11 +93,11 @@ extension ConverterViewController: UIPickerViewDataSource, UIPickerViewDelegate 
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return ConverterManager.shared.currencies.count
+        return ConverterService.shared.currencies.count
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return ConverterManager.shared.currencies[row]
+        return ConverterService.shared.currencies[row]
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {

@@ -7,9 +7,9 @@
 
 import Foundation
 
-class ConverterManager {
+class ConverterService {
     //MARK: - Singleton Pattern
-    static var shared = ConverterManager()
+    static var shared = ConverterService()
     private init() {}
     
     //MARK: - Private properties
@@ -80,6 +80,7 @@ class ConverterManager {
 
                 guard let rates = resultDict["rates"] as? [String: Any] else {
                     self.alertNotification(message: "Failed to decode data!")
+                    callBack(false, nil)
                     return
                 }
                 

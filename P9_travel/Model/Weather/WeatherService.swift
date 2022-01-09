@@ -7,9 +7,9 @@
 
 import Foundation
 
-class WeatherManager {
+class WeatherService {
     //MARK: - Singleton Pattern
-    static var shared = WeatherManager()
+    static var shared = WeatherService()
     private init() {}
     
     //MARK: - Properties

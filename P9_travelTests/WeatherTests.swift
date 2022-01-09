@@ -10,7 +10,7 @@ import XCTest
 
 class WeatherTests: XCTestCase {
     
-    var weather: WeatherManager!
+    var weather: WeatherService!
     
     func testGetWeatherShouldPostFailedCallBackIfNoData() {
         // Given
@@ -123,11 +123,11 @@ class WeatherTests: XCTestCase {
         wait(for: [expectation], timeout: 0.1)
     }
   
-    func createSession() -> WeatherManager {
+    func createSession() -> WeatherService {
         let configuration = URLSessionConfiguration.ephemeral
         configuration.protocolClasses = [TestURLProtocol.self]
         let session = URLSession(configuration: configuration)
-        return WeatherManager(session: session)
+        return WeatherService(session: session)
     }
 
 }

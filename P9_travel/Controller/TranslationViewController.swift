@@ -52,12 +52,12 @@ class TranslationViewController: UIViewController, LanguageViewControllerDelegat
     }
     
     @IBAction func tradButtonPressed(_ sender: Any) {
-        TranslatorManager.shared.textToTranslate = userInputTextView.text
+        TranslatorService.shared.textToTranslate = userInputTextView.text
         startTranslation()
     }
     
     @IBAction func detectLanguageButtonPressed(_ sender: UIButton) {
-        TranslatorManager.shared.detectLanguage(forText: userInputTextView.text) { language in
+        TranslatorService.shared.detectLanguage(forText: userInputTextView.text) { language in
             if let language = language {
                 self.sourceLanguageButton.setTitle(language, for: .normal)
             }
@@ -81,7 +81,7 @@ class TranslationViewController: UIViewController, LanguageViewControllerDelegat
     //MARK: - Private methods
     // Display the result of the translation
     private func startTranslation() {
-        TranslatorManager.shared.translate { translation in
+        TranslatorService.shared.translate { translation in
             if translation != nil {
                     self.outputTextView.text = translation
             }
@@ -90,7 +90,7 @@ class TranslationViewController: UIViewController, LanguageViewControllerDelegat
     
     // Enable selection of source or target language
     private func fetchSupportedLanguages() {
-        TranslatorManager.shared.getSupportedLanguages { success in
+        TranslatorService.shared.getSupportedLanguages { success in
             if success {
                 self.sourceLanguageButton.isEnabled = true
                 self.targetLanguageButton.isEnabled = true

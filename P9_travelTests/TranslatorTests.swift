@@ -10,7 +10,7 @@ import XCTest
 
 class TranslatorTests: XCTestCase {
 
-    var translator: TranslatorManager!
+    var translator: TranslatorService!
     
     func testGetLanguagesShouldPostSuccessCallbackIfNoErrorAndCorrectData() {
         // Given
@@ -334,10 +334,10 @@ class TranslatorTests: XCTestCase {
 
         wait(for: [expectation], timeout: 0.1)
     }
-    func createSession() -> TranslatorManager {
+    func createSession() -> TranslatorService {
         let configuration = URLSessionConfiguration.ephemeral
         configuration.protocolClasses = [TestURLProtocol.self]
         let session = URLSession(configuration: configuration)
-        return TranslatorManager(session: session)
+        return TranslatorService(session: session)
     }
 }

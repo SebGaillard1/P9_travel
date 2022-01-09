@@ -15,6 +15,12 @@ class FakeResponseData {
         return try! Data(contentsOf: url)
     }
     
+    static var badRatesData: Data? {
+        let bundle = Bundle(for: FakeResponseData.self)
+        let url = bundle.url(forResource: "BadRates", withExtension: ".json")!
+        return try! Data(contentsOf: url)
+    }
+    
     static var weatherData: Data? {
         let bundle = Bundle(for: FakeResponseData.self)
         let url = bundle.url(forResource: "Weather", withExtension: ".json")!
@@ -41,7 +47,7 @@ class FakeResponseData {
     
     static var failedDetectedLanguage: Data? {
         let bundle = Bundle(for: FakeResponseData.self)
-        let url = bundle.url(forResource: "FailedDetectedLanguage", withExtension: ".json")!
+        let url = bundle.url(forResource: "UndefinedDetectedLanguage", withExtension: ".json")!
         return try! Data(contentsOf: url)
     }
     
