@@ -218,9 +218,9 @@
 		57CE11722779CE1400431236 /* Traduction */ = {
 			isa = PBXGroup;
 			children = (
-				5727A5CF2787246C002B4B66 /* TranslationAPI.swift */,
-				5727A5D127873E27002B4B66 /* TranslationData.swift */,
 				57CE11732779CE8900431236 /* TranslatorService.swift */,
+				5727A5D127873E27002B4B66 /* TranslationData.swift */,
+				5727A5CF2787246C002B4B66 /* TranslationAPI.swift */,
 			);
 			path = Traduction;
 			sourceTree = "<group>";
