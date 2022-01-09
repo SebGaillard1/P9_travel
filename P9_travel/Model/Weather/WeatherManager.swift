@@ -29,13 +29,9 @@ class WeatherManager {
         let alertName = Notification.Name("alert")
         NotificationCenter.default.post(name: alertName, object: nil, userInfo: ["message": message])
     }
-        
-    //MARK: - Create URLRequest
-    private func createWeatherRequest(for city: String?) -> URLRequest {
-        return URLRequest(url: URL(string: "\(openWeatherApiURL)&appid=\(apiKey)&q=\(format(cityName: city))") ?? URL(string: "\(openWeatherApiURL)&q=\("")")!)
-    }
     
-    //MARK: - Fetching weather and create WeatherModel object
+    //MARK: - Public method
+    // Fetching weather
     func getWeather(for city: String?, callBack: @escaping (Bool, WeatherModel?) -> Void) {
         let request = createWeatherRequest(for: city)
         
@@ -69,6 +65,13 @@ class WeatherManager {
         task?.resume()
     }
     
+    //MARK: - Private methods
+    // Create URLRequest object
+    private func createWeatherRequest(for city: String?) -> URLRequest {
+        return URLRequest(url: URL(string: "\(openWeatherApiURL)&appid=\(apiKey)&q=\(format(cityName: city))") ?? URL(string: "\(openWeatherApiURL)&q=\("")")!)
+    }
+    
+    // Create WeatherModel object
     private func createWeatherObject(from wheatherData: WeatherData) -> WeatherModel {
         let id = wheatherData.weather[0].id
         let temp = wheatherData.main.temp
@@ -83,7 +86,7 @@ class WeatherManager {
         return WeatherModel(conditionID: id, cityName: city, temperature: temp, tempMin: tempMin, tempMax: tempMax, pressure: pressure, humidity: humidity, condition: condition, description: description)
     }
     
-    //MARK: - Format city name with whitespace
+    // Format city name with whitespace
     private func format(cityName: String?) -> String {
         guard let name = cityName else { return "" }
         let arrayOfString = name.condenseWhitespace().components(separatedBy: " ")

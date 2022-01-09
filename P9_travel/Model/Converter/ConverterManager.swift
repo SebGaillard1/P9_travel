@@ -50,12 +50,8 @@ class ConverterManager {
         NotificationCenter.default.post(name: alertName, object: nil, userInfo: ["message": message])
     }
     
-    //MARK: - Create URLRequest
-    private func createRatesRequest() -> URLRequest {
-        return URLRequest(url: URL(string: "\(url)?access_key=\(apiKey)")!)
-    }
-    
-    //MARK: - Fetching rates
+    //MARK: - Public methods
+    //Fetching rates
     func getRates(callBack: @escaping (Bool, [String: Any]?) -> Void) {
         if areRatesAlreadyFetchedToday() { callBack(true, currenciesWithRates); return }
         
@@ -89,7 +85,7 @@ class ConverterManager {
                 
                 self.currenciesWithRates = rates
                 
-                // Setting the last fetching date as Today
+                // Setting the last fetching date as current date
                 self.lastFetchingRatesDate = Date()
                 
                 callBack(true, rates)
@@ -99,18 +95,7 @@ class ConverterManager {
         task?.resume()
     }
     
-    //MARK: - Check if rates were already fetched today
-    private func areRatesAlreadyFetchedToday() -> Bool {
-        guard let date = lastFetchingRatesDate else { return false }
-        
-        if Calendar.current.isDateInToday(date) {
-            return true
-        } else {
-            return false
-        }
-    }
-    
-    //MARK: - Convert user currency to USD
+    // Convert user currency to USD
     func convert(amount: String?, from currency: String?) -> String {
         guard let amountString = amount else { return "-" }
         guard let amountDouble = Double(amountString) else { return "-" }
@@ -125,5 +110,22 @@ class ConverterManager {
         let finalResult = eurToUserCurrency * USDRateAsDouble
         
         return String(format: "%.2f", finalResult)
+    }
+    
+    //MARK: - Private methods
+    // Create URLRequest object
+    private func createRatesRequest() -> URLRequest {
+        return URLRequest(url: URL(string: "\(url)?access_key=\(apiKey)")!)
+    }
+    
+    // Check if rates were already fetched today
+    private func areRatesAlreadyFetchedToday() -> Bool {
+        guard let date = lastFetchingRatesDate else { return false }
+        
+        if Calendar.current.isDateInToday(date) {
+            return true
+        } else {
+            return false
+        }
     }
 }
