@@ -109,11 +109,6 @@
 			isa = PBXGroup;
 			children = (
 				576CC1AA276516A4000DD587 /* P9_travel */,
-				576CC1AB276516A4000DD587 /* AppDelegate.swift */,
-				576CC1AD276516A4000DD587 /* SceneDelegate.swift */,
-				57CA9EB1277A7AD600EBE3BB /* Extensions.swift */,
-				576CC1B4276516A5000DD587 /* Assets.xcassets */,
-				576CC1B9276516A5000DD587 /* Info.plist */,
 				576CC1C1276516A5000DD587 /* P9_travelTests */,
 				576CC1A9276516A4000DD587 /* Products */,
 			);
@@ -134,6 +129,11 @@
 				57CE11372778A22F00431236 /* Model */,
 				57CE11362778A22500431236 /* Controller */,
 				57CE11352778A21D00431236 /* View */,
+				576CC1AB276516A4000DD587 /* AppDelegate.swift */,
+				576CC1AD276516A4000DD587 /* SceneDelegate.swift */,
+				57CA9EB1277A7AD600EBE3BB /* Extensions.swift */,
+				576CC1B4276516A5000DD587 /* Assets.xcassets */,
+				576CC1B9276516A5000DD587 /* Info.plist */,
 			);
 			path = P9_travel;
 			sourceTree = "<group>";
