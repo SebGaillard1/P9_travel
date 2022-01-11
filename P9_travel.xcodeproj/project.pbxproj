@@ -109,6 +109,11 @@
 			isa = PBXGroup;
 			children = (
 				576CC1AA276516A4000DD587 /* P9_travel */,
+				576CC1AB276516A4000DD587 /* AppDelegate.swift */,
+				576CC1AD276516A4000DD587 /* SceneDelegate.swift */,
+				57CA9EB1277A7AD600EBE3BB /* Extensions.swift */,
+				576CC1B4276516A5000DD587 /* Assets.xcassets */,
+				576CC1B9276516A5000DD587 /* Info.plist */,
 				576CC1C1276516A5000DD587 /* P9_travelTests */,
 				576CC1A9276516A4000DD587 /* Products */,
 			);
@@ -126,10 +131,6 @@
 		576CC1AA276516A4000DD587 /* P9_travel */ = {
 			isa = PBXGroup;
 			children = (
-				576CC1AB276516A4000DD587 /* AppDelegate.swift */,
-				576CC1AD276516A4000DD587 /* SceneDelegate.swift */,
-				57CA9EB1277A7AD600EBE3BB /* Extensions.swift */,
-				576CC1B9276516A5000DD587 /* Info.plist */,
 				57CE11372778A22F00431236 /* Model */,
 				57CE11362778A22500431236 /* Controller */,
 				57CE11352778A21D00431236 /* View */,
@@ -168,10 +169,9 @@
 			isa = PBXGroup;
 			children = (
 				576CC1B1276516A4000DD587 /* Main.storyboard */,
-				576CC1B4276516A5000DD587 /* Assets.xcassets */,
 				576CC1B6276516A5000DD587 /* LaunchScreen.storyboard */,
-				57CE11772779F93000431236 /* LanguageCell.swift */,
 				57CE11782779F93000431236 /* LanguagesTableViewCell.xib */,
+				57CE11772779F93000431236 /* LanguageCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
